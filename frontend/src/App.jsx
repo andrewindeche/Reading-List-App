@@ -5,9 +5,11 @@ import HomePage from './pages/Homepage';
 import Navbar from './components/Navbar';
 
 const App = () => (
-  <Routes>
+  <>
     <Navbar />
-    <Route path="/" element={HomePage} />
-  </Routes>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+    </Routes>
+  </>
 );
 export default App;

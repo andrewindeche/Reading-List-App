@@ -1,12 +1,5 @@
 import React from 'react';
-import searchBar from '../components/Searchbar';
+import Searchbar from '../components/Searchbar';
 
-const HomePage = () => (
-  <>
-    <p>
-      Hello World
-    </p>
-    <searchBar />
-  </>
-);
+const HomePage = () => (<Searchbar />);
 export default HomePage;

@@ -24,9 +24,23 @@ body {
     flex-direction: row;
     gap: 3rem;
 }
+.nav-link {
+    color: #335C6E;
+  }
 .navLinks:hover{
     color:#5ACCCC;
 }
 .navLinks:active{
     font-weight: bolder;
 }
+.searchBar{
+    width: 45%;
+    height: 50%;
+    border:3px #5ACCCC solid;
+}
+.searchBarContainer {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100px; 
+  }
