@@ -5,13 +5,11 @@ import App from './App';
 
 const appNode = createRoot(document.getElementById('ReadingList'));
 
-const Root = () => {
-    return(
-        <React.StrictMode>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </React.StrictMode>
-    )
-}
+const Root = () => (
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+);
 appNode.render(<Root />);
