@@ -4,6 +4,29 @@ body {
     margin:0;
     font-family: "Mulish", sans-serif;
 }
+.navBar{
+    display: flex;
+    flex-direction: row;
+    gap:3rem;
+    font-weight: 600;
+    font-size: larger;
+    color:#335C6E;
+}
 .navImage {
     width: 8%;
+    margin:0.5rem;
+}
+.navLinks{
+    position: absolute;
+    right:6rem;
+    top:0.5rem;
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+}
+.navLinks:hover{
+    color:#5ACCCC;
+}
+.navLinks:active{
+    font-weight: bolder;
 }
