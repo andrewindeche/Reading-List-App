@@ -6,6 +6,8 @@ import { InputAdornment, TextField } from '@mui/material';
 const Searchbar = () => (
   <div className="searchBarContainer">
     <TextField
+      variant="outlined"
+      sx={{ '& .MuiOutlinedInput-root': { borderColor: 'green' } }}
       className="searchBar"
       placeholder="Enter your search query"
       InputProps={{

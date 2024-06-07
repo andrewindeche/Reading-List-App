@@ -36,28 +36,47 @@ body {
 .searchBar{
     width: 45%;
     height: 50%;
-    border:3px #5ACCCC solid !important;
+    gap:10em
 }
+.searchBar input::placeholder {
+    color: #335C6E; 
+    opacity: 1;  
+  }
 .searchBarContainer {
     display: flex;
     justify-content: center; 
     align-items: center; 
+    margin:3rem;
     height: 100px; 
     gap:2rem;
+  }
+  .searchBar .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border: 3px solid #5ACCCC;
+  }
+  .searchBar .MuiInputAdornment-root {
+    margin-right: 2rem;
+  }
+  
+  .searchBar .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #FAAD00; 
+  }
+  
+  .searchBar .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #5ACCCC; 
   }
   .searchBarContainer button{
     padding: 1rem;
     width: 12rem;
-    border: 2px solid #5ACCCC;
+    border: 1px solid #5ACCCC;
     color: #5ACCCC;
     border-radius: 23px;
     font-size: larger;
     background-color:white;
   }
   .searchBarContainer button:hover{
-    background-color: #FAAD00;
+    background-color: #5ACCCC ;
+    border: 2px solid #FAAD00;
     color: white;
+    font-weight: medium;
   }
-  .searchBar input {
-    border-color: #5ACCCC !important;
-  }
+
