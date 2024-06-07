@@ -5,6 +5,40 @@ body {
     font-family: "Mulish", sans-serif;
     font-weight: 400;
 }
+.dropdown {
+  position: absolute;
+  top: 80px; 
+  left: 17%;
+  width: 43%;
+  height: 300px;
+  background-color: blue;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow-y: auto; 
+}
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdownItem:hover {
+  background: #f0f0f0;
+}
+
+.dropdownItemImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.dropdownItemText {
+  flex-grow: 1;
+}
 .imageContainer {
   display: flex;
   flex-direction: column;
@@ -64,7 +98,7 @@ body {
     font-weight: 600;
     cursor: pointer;
 }
-  .navLinks p:active {
+.navLinks p:active {
     color: #5ACCCC;
 }
 .navLinks p:hover{
@@ -79,6 +113,11 @@ body {
   border: 3px solid #5ACCCC;
   border-radius: 50%;
 }
+.resultquery{
+  color: #F76434;
+  font-size: larger;
+}
+
 .Readinglist{
   display: flex;
   align-items: center;
@@ -87,7 +126,7 @@ body {
 .searchBar{
     width: 45%;
     height: 50%;
-    gap:10em
+    gap:10em;
 }
 .searchBar input::placeholder {
     color: #335C6E; 
@@ -101,6 +140,7 @@ body {
     align-items: center; 
     height: 6em; 
     gap:4rem;
+    position: relative;
   }
   .searchBar .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
     border: 3px solid #5ACCCC;
@@ -140,8 +180,4 @@ body {
     gap:6px;
     font-weight: bold;
   }
-  .resultquery{
-    color: #F76434;
-    font-size: larger;
-  }
-
+  
