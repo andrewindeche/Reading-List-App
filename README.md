@@ -1,20 +1,9 @@
  ![svgviewer-output](https://github.com/ElloTechnology/backend_takehome/assets/3518127/561bc8d4-bffc-4360-b9ea-61e876bcec93)
 
 
-# Ello Fullstack Engineering Challenge
-
-👋 Hello,
-We are really excited about you potentially joining the team, so we designed this take home exercise to give you a taste of the challenges you may encounter in the role, and better understand what it would be like to work closely together.
-
-Thanks for taking the time, and we hope to talk with you soon!
-
 ## About Ello
 
 Ello is a forward-thinking educational technology company dedicated to revolutionizing the way children learn to read. Our mission is to empower young readers with the tools they need to become proficient and passionate readers. We believe that fostering a love for reading is essential for a child's academic and personal growth.
-
-**Note:** Please don't fork this repository or create a pull request against it. Other applicants may take inspiration from it. You should create another repository for the challenge. Once the coding challenge is completed, email your solution back to Jackie [jackie@ello.com](mailto:jackie@ello.com)
-
-.
 
 
 ## Challenge
@@ -75,14 +64,6 @@ You can use this query to get the list of books to display in your frontend. You
 - Use the "Mulish" Google font
 - You can use the following colors (You don't have to use all but you can pick and choose from here)
 <img width="961" alt="Screenshot 2024-05-14 at 17 36 40" src="https://github.com/ElloTechnology/fullstack-take-home-test/assets/3518127/15922f8f-a7c7-4033-8405-76988e95afb3">
-
-
-
-
-### You will be evaluated on
-- Code quality and organization.
-- User experience and design.
-- Beautiful and responsive UI.
 
 
 # Reading-List-App
