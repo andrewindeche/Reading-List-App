@@ -119,12 +119,11 @@ body {
   color: #F76434;
   font-size: larger;
 }
-
 .Readinglist{
   display: flex;
   align-items: center;
   flex-direction: column;
-  overflow: scroll;
+  overflow: auto;
 }
 .searchBar{
     width: 45%;
@@ -185,11 +184,17 @@ body {
   }
   
   @media only screen and (min-width: 320px) and (max-width: 768px) {
-    .readingListContainer,.readingListContainer button{
+    .searchResultsContainer,.searchResultsContainer button,.readingListContainer,.readingListContainer button{
       font-size: xx-small;
+    }
+    .Readinglist{
+      overflow: auto;
     }
     .profileImage{
       padding:0.5em;
       margin:1.5em
+    }
+    .searchBarContainer button{
+      display: none;
     }
   }

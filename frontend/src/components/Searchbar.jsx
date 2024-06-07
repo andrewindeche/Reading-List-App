@@ -51,7 +51,7 @@ const Searchbar = () => {
           ),
         }}
       />
-      <button type="button">Search</button>
+      <button className="searchButton" type="button">Search</button>
       {dropdownVisible && (
         <div className="dropdown">
           {filteredSuggestions.map((suggestion) => (
