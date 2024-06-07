@@ -4,7 +4,33 @@
   "description": "A teacher Facing UI for assigning books to students",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "start": "",
+    "lint": "",
+    "build": "",
+    "test": "npm run test",
+    "clean": "",
+    "dev": ""
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "html",
+      "text"
+    ],
+    "testEnvironment": "jsdom",
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    },
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest",
+      "^.+\\.(ico|svg|jpeg|jpg|png|gif|webp)$": "jest-transform-stub"
+    }
   },
   "repository": {
     "type": "git",

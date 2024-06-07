@@ -11,3 +11,4 @@ const Root = () => {
         </React.StrictMode>
     )
 }
+appNode.render(<Root />);
