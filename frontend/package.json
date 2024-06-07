@@ -1,0 +1,27 @@
+{
+  "name": "reading-list-app",
+  "version": "1.0.0",
+  "description": "A teacher Facing UI for assigning books to students",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewindechemain/Reading-List-App.git"
+  },
+  "keywords": [
+    "Reading-List",
+    "React",
+    "Ello"
+  ],
+  "author": "Andrew Indeche",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrewindechemain/Reading-List-App/issues"
+  },
+  "homepage": "https://github.com/andrewindechemain/Reading-List-App#readme",
+  "dependencies": {
+    "eslint": "^9.4.0"
+  }
+}
