@@ -5,10 +5,12 @@ const Navbar = () => (
   <div className="navBar">
     <img className="navImage" src="https://ml.globenewswire.com/Resource/Download/671a4959-db29-4139-a53e-5ca7e3294702?size=2" alt="Ello Logo" />
     <span className="navLinks">
-      <Link to="/" style={{ textDecoration: 'none', color: 'none' }}>
+      <Link exact to="/" activeClassName="activeNavLink" style={{ textDecoration: 'none', color: 'none' }}>
         <p>Search</p>
       </Link>
-      <p>My Reading List</p>
+      <Link to="/readinglist" activeClassName="activeNavLink" style={{ textDecoration: 'none', color: 'none' }}>
+        <p>My Reading List</p>
+      </Link>
     </span>
   </div>
 );

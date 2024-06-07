@@ -3,12 +3,12 @@ body {
     padding:0;
     margin:0;
     font-family: "Mulish", sans-serif;
+    font-weight: 400;
 }
 .navBar{
     display: flex;
     flex-direction: row;
     gap:3rem;
-    font-weight: 600;
     font-size: larger;
     color:#335C6E;
 }
@@ -23,30 +23,34 @@ body {
     display: flex;
     flex-direction: row;
     gap: 3rem;
+    font-weight: 600;
+    cursor: pointer;
 }
-.nav-link {
-    color: #335C6E;
-  }
-.navLinks:hover{
+  .navLinks p:active {
+    color: #5ACCCC;
+}
+.navLinks p:hover{
     color:#5ACCCC;
 }
-.navLinks:active{
-    font-weight: bolder;
+.navLinks p{
+  color: #335C6E
 }
 .searchBar{
     width: 45%;
-    height: 50%;
+    height: 30%;
     gap:10em
 }
 .searchBar input::placeholder {
-    color: #335C6E; 
+    color: #2C2D2D; 
     opacity: 1;  
+    font-size: 16px;
+    font-weight: 550;
   }
 .searchBarContainer {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    margin:3rem;
+    margin:1rem;
     height: 100px; 
     gap:2rem;
   }
@@ -66,11 +70,12 @@ body {
   }
   .searchBarContainer button{
     padding: 1rem;
-    width: 12rem;
+    width: 14rem;
     border: 1px solid #5ACCCC;
     color: #5ACCCC;
     border-radius: 23px;
-    font-size: larger;
+    font-size: large;
+    font-weight: 600;
     background-color:white;
   }
   .searchBarContainer button:hover{
@@ -78,5 +83,17 @@ body {
     border: 2px solid #FAAD00;
     color: white;
     font-weight: medium;
+  }
+  .searchResults{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    font-size: large;
+    gap:3px;
+    font-weight: bold;
+  }
+  .resultquery{
+    color: #F76434;
+    font-size: larger;
   }
 

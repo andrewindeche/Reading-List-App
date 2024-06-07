@@ -9,7 +9,7 @@ const Searchbar = () => (
       variant="outlined"
       sx={{ '& .MuiOutlinedInput-root': { borderColor: 'green' } }}
       className="searchBar"
-      placeholder="Enter your search query"
+      placeholder="Search For Book By Title"
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
