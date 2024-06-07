@@ -15,6 +15,14 @@ module.exports =[
         jsx: true,
       },
     },
+    parserOptions: {
+      "ecmaVersion": "latest",
+      "ecmaFeatures": {
+          "jsx": true,
+          "ts": true
+      },
+      "sourceType": "module"
+  },
     plugins: {
       '@typescript-eslint': eslintPluginTypeScript,
       'react': eslintPluginReact,
