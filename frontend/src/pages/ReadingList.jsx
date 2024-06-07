@@ -1,6 +1,8 @@
 import React from "react";
 
 const Readinglist = () => (
-  <p>ReadingList</p>
+  <div>
+    <p>Return To Search</p>
+  </div>
 );
 export default Readinglist;
