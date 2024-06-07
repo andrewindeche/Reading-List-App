@@ -5,6 +5,42 @@ body {
     font-family: "Mulish", sans-serif;
     font-weight: 400;
 }
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
+  border: 1.5px solid #5ACCCC;
+  width:18%;
+  border-radius: 15px;
+  padding:1em;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.imageContainer button{
+  color:black;
+  border: 1.5px solid #5ACCCC;
+  background-color: white;
+  width:100%;
+  border-radius: 15px;
+  font-weight: bold;
+  padding: 1em;
+  align-self: center;
+}
+.imageContainer button:hover{
+  background-color:#5ACCCC;
+  color:white;
+}
+.imageContainer img{
+  width:90%;
+  gap:2px;
+  padding: 10px;
+}
+.imageRow {
+  display: flex;
+  justify-content: space-around; 
+  gap: 2px; 
+  flex-wrap: wrap;
+}
 .navBar{
     display: flex;
     flex-direction: row;
