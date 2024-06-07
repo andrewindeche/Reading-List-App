@@ -73,6 +73,16 @@ body {
 .navLinks p{
   color: #335C6E
 }
+.profileImage{
+  width:15%;
+  margin:0 auto;
+  border: 3px solid #5ACCCC;
+  border-radius: 50%;
+}
+.Readinglist{
+  display: flex;
+  align-items: center;
+}
 .searchBar{
     width: 45%;
     height: 50%;
