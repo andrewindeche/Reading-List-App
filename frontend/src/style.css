@@ -36,11 +36,28 @@ body {
 .searchBar{
     width: 45%;
     height: 50%;
-    border:3px #5ACCCC solid;
+    border:3px #5ACCCC solid !important;
 }
 .searchBarContainer {
     display: flex;
     justify-content: center; 
     align-items: center; 
     height: 100px; 
+    gap:2rem;
+  }
+  .searchBarContainer button{
+    padding: 1rem;
+    width: 12rem;
+    border: 2px solid #5ACCCC;
+    color: #5ACCCC;
+    border-radius: 23px;
+    font-size: larger;
+    background-color:white;
+  }
+  .searchBarContainer button:hover{
+    background-color: #FAAD00;
+    color: white;
+  }
+  .searchBar input {
+    border-color: #5ACCCC !important;
   }
