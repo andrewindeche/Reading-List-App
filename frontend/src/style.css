@@ -82,6 +82,7 @@ body {
 .Readinglist{
   display: flex;
   align-items: center;
+  flex-direction: column;
 }
 .searchBar{
     width: 45%;
@@ -131,7 +132,7 @@ body {
     color: white;
     font-weight: medium;
   }
-  .searchResults{
+  .searchResults, .readingListResults{
     display: flex;
     justify-content: center; 
     align-items: center;
