@@ -2,38 +2,65 @@ import React, { useState, useEffect } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment, TextField } from '@mui/material';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useLazyQuery, gql } from '@apollo/client';
 
-const dummySuggestions = [
-  { title: 'Book 1', image: 'https://via.placeholder.com/50', id: 1 },
-  { title: 'Book 2', image: 'https://via.placeholder.com/50', id: 2 },
-  { title: 'Book 3', image: 'https://via.placeholder.com/50', id: 3 },
-];
+const SEARCH_BOOKS = gql`
+  query SearchBooks($searchText: String!) {
+    searchBooks(searchText: $searchText) {
+      title
+      author
+      coverPhotoURL
+    }
+  }
+`;
 
-const Searchbar = () => {
+const Searchbar = ({ setSearchResults }) => {
   const [searchText, setSearchText] = useState('');
+  const [searchBooks, { loading, error, data }] = useLazyQuery(SEARCH_BOOKS);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   useEffect(() => {
     if (searchText.length > 0) {
-      setFilteredSuggestions(
-        // eslint-disable-next-line max-len
-        dummySuggestions.filter((suggestion) => suggestion.title.toLowerCase().includes(searchText.toLowerCase())),
-      );
+      searchBooks({ variables: { searchText } });
       setDropdownVisible(true);
     } else {
       setDropdownVisible(false);
     }
-  }, [searchText]);
+  }, [searchText, searchBooks]);
+
+  useEffect(() => {
+    if (data && data.searchBooks) {
+      setFilteredSuggestions(data.searchBooks);
+    }
+  }, [data]);
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
+  };
+
+  const handleSearch = () => {
+    setSearchResults(filteredSuggestions);
+    searchBooks({ variables: { searchText } });
   };
 
   const handleItemClick = (suggestion) => {
     setSearchText(suggestion.title);
     setDropdownVisible(false);
   };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) {
+    return (
+      <p>
+        Error:
+        {' '}
+        {error.message}
+      </p>
+    );
+  }
+
   return (
     <div className="searchBarContainer">
       <TextField
@@ -51,16 +78,16 @@ const Searchbar = () => {
           ),
         }}
       />
-      <button className="searchButton" type="button">Search</button>
+      <button className="searchButton" type="button" onClick={handleSearch}>Search</button>
       {dropdownVisible && (
         <div className="dropdown">
-          {filteredSuggestions.map((suggestion) => (
+          {filteredSuggestions.map((suggestion, index) => (
             <div
-              key={suggestion.id}
+              key={index}
               className="dropdownItem"
               onClick={() => handleItemClick(suggestion)}
             >
-              <img src={suggestion.image} alt={suggestion.title} className="dropdownItemImage" />
+              <img src={suggestion.coverPhotoURL} alt={suggestion.title} className="dropdownItemImage" />
               <p className="dropdownItemText">{suggestion.title}</p>
             </div>
           ))}

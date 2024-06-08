@@ -1,5 +1,4 @@
 import React from 'react';
-import image1 from './assets/image1.webp';
 
 const numberOfBooks = 3;
 const Readinglist = ({ onAddToReadingList }) => (
