@@ -32,11 +32,11 @@ const SearchResults = ({ onAddToReadingList }) => {
 
   return (
     <div className="resultsPageContainer">
-      <h2>
-        Search Results for `&quot;`
-        {query}
-        `&quot;`
-      </h2>
+      <p className="searchResults">
+        Search Results for &quot;
+        <span className="resultquery">{query}</span>
+        &quot;
+      </p>
       <div className="imageGrid">
         {data.books.map((book, index) => (
           <div key={`${book.title}-${index}`} className="imageCard">
