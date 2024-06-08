@@ -44,7 +44,14 @@ body {
 .dropdownItemText {
   flex-grow: 1;
 }
-.imageContainer {
+.Error{
+  width:30%;
+  margin:0 auto;
+}
+h2 {
+  text-align: center;
+}
+.imageContainer, .imageGrid {
   display: flex;
   flex-direction: column;
   margin: 0.5em;
@@ -82,6 +89,7 @@ body {
   justify-content: space-around; 
   gap: 2px; 
   flex-wrap: wrap;
+  animation: fadeInOut 10s infinite;
 }
 .navBar{
     display: flex;
@@ -118,6 +126,9 @@ body {
   margin:0 auto;
   border: 3px solid #5ACCCC;
   border-radius: 50%;
+}
+.resultsPageContainer {
+  padding: 20px;
 }
 .resultquery{
   color: #F76434;
@@ -187,7 +198,14 @@ body {
     gap:6px;
     font-weight: bold;
   }
-  
+  @keyframes fadeInOut {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
   @media only screen and (min-width: 320px) and (max-width: 768px) {
     .searchResultsContainer,.searchResultsContainer button,.readingListContainer,.readingListContainer button{
       font-size: xx-small;

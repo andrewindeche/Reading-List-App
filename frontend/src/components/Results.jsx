@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useQuery, gql } from '@apollo/client';
 
@@ -13,10 +13,23 @@ const GET_SEARCH_RESULTS = gql`
   }
 `;
 
-const Searchresults = ({ searchText, onAddToReadingList }) => {
+const Results = ({ searchText, onAddToReadingList }) => {
   const { loading, error, data } = useQuery(GET_SEARCH_RESULTS, {
     variables: { searchText },
   });
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (data && data.books) {
+      const intervalId = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 8) % data.books.length);
+      }, 10000);
+
+      return () => clearInterval(intervalId);
+    }
+    return undefined;
+  }, [data]);
 
   if (loading) return <p>Loading...</p>;
   if (error) {
@@ -32,16 +45,19 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
   return (
     <div className="searchResultsContainer">
       <p className="searchResults">
-        {data.books.length > 8 ? '100' : data.books.length}
-        {' '}
-        {' '}
-        Books
-        {' '}
-        <span className="resultquery">in the Library Today ☺ ㋡</span>
+        <span className="resultquery">
+          ☺
+          {data.books.length > 8 ? '100' : data.books.length}
+          {' '}
+          {' '}
+          Books
+          {' '}
+        </span>
+        in the Library Today ㋡
       </p>
       <div className="imageRow">
-        {data.books.slice(0, 8).map((book) => (
-          <div key={book.title} className="imageContainer">
+        {data.books.slice(currentIndex, currentIndex + 8).map((book, index) => (
+          <div key={`${book.title}-${index}`} className={`imageContainer ${index === currentIndex ? 'randomFade' : ''}`}>
             <img src={book.coverPhotoURL} alt={book.title} />
             <p className="bookTitle">
               {book.title}
@@ -59,8 +75,8 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
     </div>
   );
 };
-Searchresults.propTypes = {
+Results.propTypes = {
   searchText: PropTypes.string.isRequired,
   onAddToReadingList: PropTypes.func.isRequired,
 };
-export default Searchresults;
+export default Results;
