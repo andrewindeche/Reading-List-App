@@ -82,6 +82,7 @@ body {
   justify-content: space-around; 
   gap: 2px; 
   flex-wrap: wrap;
+  animation: fadeInOut 8s infinite;
 }
 .navBar{
     display: flex;
@@ -187,7 +188,14 @@ body {
     gap:6px;
     font-weight: bold;
   }
-  
+  @keyframes fadeInOut {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
   @media only screen and (min-width: 320px) and (max-width: 768px) {
     .searchResultsContainer,.searchResultsContainer button,.readingListContainer,.readingListContainer button{
       font-size: xx-small;
