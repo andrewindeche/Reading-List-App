@@ -58,7 +58,7 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
   );
 };
 Searchresults.propTypes = {
-  searchText: PropTypes.func.isRequired,
+  searchText: PropTypes.string.isRequired,
   onAddToReadingList: PropTypes.func.isRequired,
 };
 export default Searchresults;
