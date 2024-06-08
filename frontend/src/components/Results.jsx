@@ -13,7 +13,7 @@ const GET_SEARCH_RESULTS = gql`
   }
 `;
 
-const Searchresults = ({ searchText, onAddToReadingList }) => {
+const Results = ({ searchText, onAddToReadingList }) => {
   const { loading, error, data } = useQuery(GET_SEARCH_RESULTS, {
     variables: { searchText },
   });
@@ -24,7 +24,7 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
     if (data && data.books) {
       const intervalId = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 8) % data.books.length);
-      }, 8000);
+      }, 10000);
 
       return () => clearInterval(intervalId);
     }
@@ -75,8 +75,8 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
     </div>
   );
 };
-Searchresults.propTypes = {
+Results.propTypes = {
   searchText: PropTypes.string.isRequired,
   onAddToReadingList: PropTypes.func.isRequired,
 };
-export default Searchresults;
+export default Results;

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Searchbar from '../components/Searchbar';
-import Searchresults from '../components/Searchresults';
+import Results from '../components/Results';
 
 const HomePage = ({ onAddToReadingList }) => {
   const [searchResults, setSearchResults] = useState([]);
   return (
     <>
       <Searchbar setSearchResults={setSearchResults} />
-      <Searchresults searchText={searchResults.length > 0 ? searchResults[0].title : ''} onAddToReadingList={onAddToReadingList} />
+      <Results searchText={searchResults.length > 0 ? searchResults[0].title : ''} onAddToReadingList={onAddToReadingList} />
     </>
   );
 };
