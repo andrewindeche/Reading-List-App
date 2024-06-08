@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
 import './style.css';
 import HomePage from './pages/Homepage';
 import Navbar from './components/Navbar';
@@ -30,4 +30,5 @@ const App = () => {
     </>
   );
 };
+
 export default App;
