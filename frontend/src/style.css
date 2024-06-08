@@ -44,7 +44,13 @@ body {
 .dropdownItemText {
   flex-grow: 1;
 }
-.imageContainer {
+.Error{
+  width:50%
+}
+h2 {
+  text-align: center;
+}
+.imageContainer, .imageGrid {
   display: flex;
   flex-direction: column;
   margin: 0.5em;
@@ -119,6 +125,9 @@ body {
   margin:0 auto;
   border: 3px solid #5ACCCC;
   border-radius: 50%;
+}
+.resultsPageContainer {
+  padding: 20px;
 }
 .resultquery{
   color: #F76434;

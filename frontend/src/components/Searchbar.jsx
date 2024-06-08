@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import SearchIcon from '@mui/icons-material/Search';
+import { useNavigate } from 'react-router-dom';
 import { InputAdornment, TextField } from '@mui/material';
 import { useLazyQuery, gql } from '@apollo/client';
 
@@ -20,6 +21,7 @@ const Searchbar = ({ setSearchResults }) => {
   const [searchBooks, { loading, error, data }] = useLazyQuery(SEARCH_BOOKS);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (searchText.length > 0) {
@@ -35,7 +37,7 @@ const Searchbar = ({ setSearchResults }) => {
     if (data && data.books) {
       setFilteredSuggestions(data.books);
     }
-  }, [data]);
+  }, [data, setSearchResults]);
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
@@ -45,6 +47,7 @@ const Searchbar = ({ setSearchResults }) => {
     setSearchResults(filteredSuggestions);
     searchBooks({ variables: { searchText } });
     setDropdownVisible(false);
+    navigate(`/results/${searchText}`);
   };
 
   const handleItemClick = (suggestion) => {
