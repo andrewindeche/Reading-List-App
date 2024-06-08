@@ -35,24 +35,38 @@ const Searchbar = ({ setSearchResults }) => {
 
   useEffect(() => {
     if (data && data.books) {
-      setFilteredSuggestions(data.books);
+      const suggestions = data.books
+        .filter((book) => book.title.toLowerCase().includes(searchText.toLowerCase()))
+        .sort((a, b) => a.title.localeCompare(b.title));
+      setFilteredSuggestions(suggestions);
     }
-  }, [data, setSearchResults]);
+  }, [data, setSearchResults, searchText]);
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
   };
 
   const handleSearch = () => {
-    setSearchResults(filteredSuggestions);
-    searchBooks({ variables: { searchText } });
+    if (searchText.trim().length === 0) {
+      setSearchResults([]);
+    } else {
+      const exactMatch = filteredSuggestions.find(
+        (suggestion) => suggestion.title.toLowerCase() === searchText.toLowerCase()
+      );
+      if (exactMatch) {
+        setSearchResults([exactMatch]);
+      } else {
+        setSearchResults(filteredSuggestions);
+      }
+      navigate(`/results/${searchText}`);
+    }
     setDropdownVisible(false);
-    navigate(`/results/${searchText}`);
   };
 
   const handleItemClick = (suggestion) => {
     setSearchText(suggestion.title);
     setDropdownVisible(false);
+    handleSearch();
   };
 
   const handleKeyDown = (e, suggestion) => {

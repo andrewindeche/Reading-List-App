@@ -1,3 +1,7 @@
+.activeNavLink {
+  color: #5ACCCC;
+  font-weight: bolder;
+}
 body {
     box-sizing: border-box;
     padding:0;
@@ -101,6 +105,11 @@ h2 {
 .navImage {
     width: 8%;
     margin:0.3em 1.5rem;
+}
+.navLink {
+  text-decoration: none;
+  color:#5ACCCC;
+  font-weight: bold;
 }
 .navLinks{
     position: absolute;

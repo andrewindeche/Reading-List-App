@@ -53,7 +53,7 @@ const Results = ({ searchText, onAddToReadingList }) => {
           Books
           {' '}
         </span>
-        in the Library Today ㋡
+        are in the Library ㋡
       </p>
       <div className="imageRow">
         {data.books.slice(currentIndex, currentIndex + 8).map((book, index) => (
