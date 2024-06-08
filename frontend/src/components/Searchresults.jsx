@@ -28,17 +28,19 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
       </p>
     );
   }
+
   return (
     <div className="searchResultsContainer">
       <p className="searchResults">
-        {data.books.length}
+        {data.books.length > 8 ? '100' : data.books.length}
+        {' '}
         {' '}
         Search Results for
         {' '}
         <span className="resultquery">Book1</span>
       </p>
       <div className="imageRow">
-        {data.books.map((book) => (
+        {data.books.slice(0, 8).map((book) => (
           <div key={book.title} className="imageContainer">
             <img src={book.coverPhotoURL} alt={book.title} />
             <p className="bookTitle">
