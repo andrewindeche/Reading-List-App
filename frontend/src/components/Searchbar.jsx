@@ -8,7 +8,7 @@ import { useLazyQuery, gql } from '@apollo/client';
 
 const SEARCH_BOOKS = gql`
   query SearchBooks($searchText: String!) {
-    searchBooks(searchText: $searchText) {
+    books(searchText: $searchText) {
       title
       author
       coverPhotoURL

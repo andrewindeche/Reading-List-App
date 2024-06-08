@@ -4,7 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 
 const GET_SEARCH_RESULTS = gql`
   query GetSearchResults($searchText: String!) {
-    books {
+    books(searchText: $searchText) {
       title
       author
       coverPhotoURL
