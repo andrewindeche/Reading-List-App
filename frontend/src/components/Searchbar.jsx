@@ -35,10 +35,18 @@ const Searchbar = ({ setSearchResults }) => {
 
   useEffect(() => {
     if (data && data.books) {
-      const suggestions = data.books
-        .filter((book) => book.title.toLowerCase().includes(searchText.toLowerCase()))
+      const lowerCaseSearchText = searchText.toLowerCase();
+
+      const prioritizedSuggestions = data.books
+        .filter((book) => book.title.toLowerCase().startsWith(lowerCaseSearchText))
         .sort((a, b) => a.title.localeCompare(b.title));
-      setFilteredSuggestions(suggestions);
+
+      const otherSuggestions = data.books
+        .filter((book) => !book.title.toLowerCase().startsWith(lowerCaseSearchText))
+        .filter((book) => book.title.toLowerCase().includes(lowerCaseSearchText))
+        .sort((a, b) => a.title.localeCompare(b.title));
+
+      setFilteredSuggestions([...prioritizedSuggestions, ...otherSuggestions]);
     }
   }, [data, setSearchResults, searchText]);
 
