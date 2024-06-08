@@ -12,6 +12,7 @@ const SEARCH_BOOKS = gql`
       title
       author
       coverPhotoURL
+      readingLevel
     }
   }
 `;

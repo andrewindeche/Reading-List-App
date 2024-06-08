@@ -4,10 +4,11 @@ import { useQuery, gql } from '@apollo/client';
 
 const GET_SEARCH_RESULTS = gql`
   query GetSearchResults($searchText: String!) {
-    searchResults(searchText: $searchText) {
+    books {
       title
       author
       coverPhotoURL
+      readingLevel
     }
   }
 `;
@@ -30,14 +31,14 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
   return (
     <div className="searchResultsContainer">
       <p className="searchResults">
-        {data.searchResults.length}
+        {data.books.length}
         {' '}
         Search Results for
         {' '}
         <span className="resultquery">Book1</span>
       </p>
       <div className="imageRow">
-        {data.searchResults.map((book) => (
+        {data.books.map((book) => (
           <div key={book.title} className="imageContainer">
             <img src={book.coverPhotoURL} alt={book.title} />
             <p>
