@@ -24,7 +24,7 @@ const Results = ({ searchText, onAddToReadingList }) => {
     if (data && data.books) {
       const intervalId = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 8) % data.books.length);
-      }, 10000);
+      }, 9000);
 
       return () => clearInterval(intervalId);
     }

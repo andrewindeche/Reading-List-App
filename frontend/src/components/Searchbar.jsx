@@ -59,7 +59,7 @@ const Searchbar = ({ setSearchResults }) => {
       setSearchResults([]);
     } else {
       const exactMatch = filteredSuggestions.find(
-        (suggestion) => suggestion.title.toLowerCase() === searchText.toLowerCase()
+        (suggestion) => suggestion.title.toLowerCase() === searchText.toLowerCase(),
       );
       if (exactMatch) {
         setSearchResults([exactMatch]);
