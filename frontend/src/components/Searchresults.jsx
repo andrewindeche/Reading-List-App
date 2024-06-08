@@ -37,8 +37,8 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
         <span className="resultquery">Book1</span>
       </p>
       <div className="imageRow">
-        {data.searchResults.map((book, index) => (
-          <div key={index} className="imageContainer">
+        {data.searchResults.map((book) => (
+          <div key={book.title} className="imageContainer">
             <img src={book.coverPhotoURL} alt={book.title} />
             <p>
               Title of Book
@@ -59,6 +59,6 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
 };
 Searchresults.propTypes = {
   searchText: PropTypes.func.isRequired,
-  onAddToReadingList: PropTypes.func.isRequired
+  onAddToReadingList: PropTypes.func.isRequired,
 };
 export default Searchresults;
