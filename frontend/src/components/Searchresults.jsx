@@ -41,12 +41,11 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
         {data.books.map((book) => (
           <div key={book.title} className="imageContainer">
             <img src={book.coverPhotoURL} alt={book.title} />
-            <p>
-              Title of Book
+            <p className="bookTitle">
               {book.title}
             </p>
-            <p>
-              By Author
+            <p className="bookAuthor">
+              By:
               {book.author}
             </p>
             <button type="button" onClick={() => onAddToReadingList(book)}>
