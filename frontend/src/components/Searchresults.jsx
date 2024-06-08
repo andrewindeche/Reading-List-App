@@ -35,9 +35,9 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
         {data.books.length > 8 ? '100' : data.books.length}
         {' '}
         {' '}
-        Search Results for
+        Books
         {' '}
-        <span className="resultquery">Book1</span>
+        <span className="resultquery">in the Library Today ☺ ㋡</span>
       </p>
       <div className="imageRow">
         {data.books.slice(0, 8).map((book) => (
