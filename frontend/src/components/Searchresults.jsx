@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useQuery, gql } from '@apollo/client';
 
 const GET_SEARCH_RESULTS = gql`
@@ -55,5 +56,9 @@ const Searchresults = ({ searchText, onAddToReadingList }) => {
       </div>
     </div>
   );
+};
+Searchresults.propTypes = {
+  searchText: PropTypes.func.isRequired,
+  onAddToReadingList: PropTypes.func.isRequired
 };
 export default Searchresults;
