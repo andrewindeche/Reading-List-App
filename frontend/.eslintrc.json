@@ -9,6 +9,11 @@
         "plugin:react/recommended",
         "airbnb"
     ],
+    "plugins": [
+      "react",
+      "testing-library",
+      "jest"
+    ],
     "parserOptions": {
         "ecmaVersion": "latest",
         "ecmaFeatures": {

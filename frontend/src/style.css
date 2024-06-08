@@ -46,6 +46,7 @@ body {
   flex-direction: column;
   margin: 0.5em;
   border: 1.5px solid #5ACCCC;
+  color:#335C6E;
   width:18%;
   border-radius: 15px;
   padding:1em;
@@ -179,6 +180,7 @@ body {
     justify-content: center; 
     align-items: center;
     font-size: larger;
+    color: #335C6E;
     gap:6px;
     font-weight: bold;
   }
@@ -194,7 +196,13 @@ body {
       padding:0.5em;
       margin:1.5em
     }
+    .searchBarContainer,.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline, .searchBar input::placeholder{
+      font-size: x-small;
+    }
     .searchBarContainer button{
       display: none;
+    }
+    .searchBar .MuiInputAdornment-root {
+      margin-right: 2px;
     }
   }
