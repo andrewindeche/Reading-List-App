@@ -5,7 +5,7 @@ const Navbar = () => (
   <div className="navBar">
     <img className="navImage" src="https://ml.globenewswire.com/Resource/Download/671a4959-db29-4139-a53e-5ca7e3294702?size=2" alt="Ello Logo" />
     <span className="navLinks">
-      <Link exact to="/" activeclassname="activeNavLink" style={{ textDecoration: 'none', color: 'none' }}>
+      <Link to="/" activeclassname="activeNavLink" style={{ textDecoration: 'none', color: 'none' }}>
         <p>Search</p>
       </Link>
       <Link to="/readinglist" activeclassname="activeNavLink" style={{ textDecoration: 'none', color: 'none' }}>

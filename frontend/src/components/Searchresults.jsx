@@ -1,34 +1,66 @@
 import React from 'react';
-import image1 from '../assets/image1.webp';
+import PropTypes from 'prop-types';
+import { useQuery, gql } from '@apollo/client';
 
-const numberOfBooks = 3;
-const Searchresults = ({ searchResults,onAddToReadingList }) => (
-  <div className="searchResultsContainer">
-    <p className="searchResults">
-      12 Search Results for
-      {' '}
-      <span className="resultquery">Book1</span>
-    </p>
-    <div className="imageRow">
-      {[...Array(numberOfBooks)].map((_, index) => (
-        <div key={index} className="imageContainer">
-          <img src={image1} alt={`Book ${index + 1}`} />
-          <p>
-            Title of Book
-            {' '}
-            {index + 1}
-          </p>
-          <p>
-            By Author
-            {' '}
-            {index + 1}
-          </p>
-          <button type="button" onClick={() => onAddToReadingList({ title: `Title of Book ${index + 1}`, author: `Author ${index + 1}` })}>
-            Add To Reading List
-          </button>
-        </div>
-      ))}
+const GET_SEARCH_RESULTS = gql`
+  query GetSearchResults($searchText: String!) {
+    books(searchText: $searchText) {
+      title
+      author
+      coverPhotoURL
+      readingLevel
+    }
+  }
+`;
+
+const Searchresults = ({ searchText, onAddToReadingList }) => {
+  const { loading, error, data } = useQuery(GET_SEARCH_RESULTS, {
+    variables: { searchText },
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) {
+    return (
+      <p>
+        Error:
+        {' '}
+        {error.message}
+      </p>
+    );
+  }
+
+  return (
+    <div className="searchResultsContainer">
+      <p className="searchResults">
+        {data.books.length > 8 ? '100' : data.books.length}
+        {' '}
+        {' '}
+        Books
+        {' '}
+        <span className="resultquery">in the Library Today ☺ ㋡</span>
+      </p>
+      <div className="imageRow">
+        {data.books.slice(0, 8).map((book) => (
+          <div key={book.title} className="imageContainer">
+            <img src={book.coverPhotoURL} alt={book.title} />
+            <p className="bookTitle">
+              {book.title}
+            </p>
+            <p className="bookAuthor">
+              By:
+              {book.author}
+            </p>
+            <button type="button" onClick={() => onAddToReadingList(book)}>
+              Add To Reading List
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
+Searchresults.propTypes = {
+  searchText: PropTypes.string.isRequired,
+  onAddToReadingList: PropTypes.func.isRequired,
+};
 export default Searchresults;
