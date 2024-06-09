@@ -217,23 +217,44 @@ h2 {
     font-weight: bold;
   }
   @media only screen and (min-width: 320px) and (max-width: 768px) {
-    .searchResultsContainer,.searchResultsContainer button,.readingListContainer,.readingListContainer button{
-      font-size: xx-small;
+    #readinglistbutton{
+      font-size: 0%;
     }
-    .Readinglist{
-      overflow: auto;
+    .navBar{
+      font-size: 10px;
     }
     .profileImage{
       padding:0.5em;
       margin:1.5em
     }
-    .searchBarContainer,.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline, .searchBar input::placeholder{
+    .resultsPageContainer button{
+      font-size: 0%;
+    }
+    #resultsbutton{
+      font-size: 0%;
+    }
+    .Readinglist{
+      overflow: auto;
+    }
+    .searchBarContainer,.resultsPageContainer,.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline, .searchBar input::placeholder{
       font-size: x-small;
+    }
+    .searchBarContainer{
+      margin:2em
     }
     .searchBarContainer button{
       display: none;
     }
     .searchBar .MuiInputAdornment-root {
       margin-right: 2px;
+    }
+    .searchBar input::placeholder{
+      font-size:6px;
+    }
+    .searchResultsContainer,.searchResultsContainer button,.readingListContainer,.readingListContainer button{
+      font-size: xx-small;
+    }
+    .searchResults {
+      font-size: 7px;
     }
   }

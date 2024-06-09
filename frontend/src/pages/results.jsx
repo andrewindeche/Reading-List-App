@@ -106,6 +106,7 @@ const Results = ({ searchText, onAddToReadingList }) => {
             </p>
             <button
               type="button"
+              id="resultsbutton"
               onClick={handleAddToList}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}

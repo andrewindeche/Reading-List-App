@@ -67,6 +67,7 @@ const ReadingList = ({ onAddToReadingList }) => {
               </p>
               <button
                 type="button"
+                id="readinglistbutton"
                 onClick={() => onAddToReadingList({ title: `Title of Book ${index + 1}`, author: `Author ${index + 1}` })}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}

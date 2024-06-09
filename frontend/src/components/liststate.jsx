@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Results from './Results';
-import ReadingList from './ReadingList';
+import Results from './pages/results';
+import ReadingList from './pages/readinglist';
 
 const ListState = () => {
   const [readingList, setReadingList] = useState([]);
