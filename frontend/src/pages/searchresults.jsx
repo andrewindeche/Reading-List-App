@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const GET_SEARCH_RESULT = gql`
   query GetSearchResult($title: String!) {
@@ -15,6 +17,43 @@ const GET_SEARCH_RESULT = gql`
 `;
 
 const SearchResults = ({ onAddToReadingList }) => {
+  const [isAdded, setIsAdded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleAddToList = () => {
+    setIsAdded(true);
+    onAddToReadingList(book);
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const getBackgroundColor = () => {
+    switch (true) {
+    case isAdded:
+      return '#5ACCCC';
+    case isHovered:
+      return '#CFFAFA';
+    default:
+      return 'white';
+    }
+  };
+
+  const getButtonText = () => {
+    if (isAdded) return 'Added';
+    return 'Add to Library';
+  };
+
+  const getButtonIcon = () => {
+    if (isAdded) return <CheckCircleIcon style={{ marginLeft: '10px' }} />;
+    return <LibraryAddIcon style={{ marginLeft: '10px' }} />;
+  };
+
   const { query } = useParams();
   const { loading, error, data } = useQuery(GET_SEARCH_RESULT, {
     variables: { title: query },
@@ -50,8 +89,25 @@ const SearchResults = ({ onAddToReadingList }) => {
               {' '}
               {book.author}
             </p>
-            <button type="button" onClick={() => onAddToReadingList(book)}>
-              Add To Reading List
+            <button
+              type="button"
+              onClick={handleAddToList}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                display: 'flex',
+                alignSelf: 'center',
+                justifyContent: 'center',
+                padding: '5px 10px',
+                borderRadius: '15px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                backgroundColor: getBackgroundColor(),
+                color: isAdded ? 'white' : '#335C6E',
+              }}
+            >
+              {getButtonText()}
+              {getButtonIcon()}
             </button>
           </div>
         </div>

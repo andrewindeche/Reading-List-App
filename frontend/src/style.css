@@ -92,11 +92,6 @@ h2 {
   padding: 1em;
   align-self: center;
 }
-.imageContainer button:hover, .imageCard button:hover{
-  background-color:#5ACCCC;
-  color:white;
-  border: 2px solid #FAAD00;
-}
 .imageContainer img, .imageCard img{
   width:90%;
   gap:2px;

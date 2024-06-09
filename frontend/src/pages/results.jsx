@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useQuery, gql } from '@apollo/client';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 const GET_SEARCH_RESULTS = gql`
   query GetSearchResults($searchText: String!) {
@@ -19,12 +21,48 @@ const Results = ({ searchText, onAddToReadingList }) => {
   });
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAdded, setIsAdded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleAddToList = () => {
+    setIsAdded(true);
+    onAddToReadingList(book);
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
+  const getBackgroundColor = () => {
+    switch (true) {
+    case isAdded:
+      return '#5ACCCC';
+    case isHovered:
+      return '#CFFAFA';
+    default:
+      return 'white';
+    }
+  };
+
+  const getButtonText = () => {
+    if (isAdded) return 'Added';
+    return 'Add to Library';
+  };
+
+  const getButtonIcon = () => {
+    if (isAdded) return <CheckCircleIcon style={{ marginLeft: '10px' }} />;
+    return <LibraryAddIcon style={{ marginLeft: '10px' }} />;
+  };
 
   useEffect(() => {
     if (data && data.books) {
       const intervalId = setInterval(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 8) % data.books.length);
-      }, 9000);
+      }, 8000);
 
       return () => clearInterval(intervalId);
     }
@@ -53,7 +91,7 @@ const Results = ({ searchText, onAddToReadingList }) => {
           Books
           {' '}
         </span>
-        are in the Library ㋡
+        are Available ㋡
       </p>
       <div className="imageRow">
         {data.books.slice(currentIndex, currentIndex + 8).map((book, index) => (
@@ -66,8 +104,25 @@ const Results = ({ searchText, onAddToReadingList }) => {
               By:
               {book.author}
             </p>
-            <button type="button" onClick={() => onAddToReadingList(book)}>
-              Add To Reading List
+            <button
+              type="button"
+              onClick={handleAddToList}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                display: 'flex',
+                alignSelf: 'center',
+                justifyContent: 'center',
+                padding: '5px 10px',
+                borderRadius: '15px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                backgroundColor: getBackgroundColor(),
+                color: isAdded ? 'white' : '#335C6E',
+              }}
+            >
+              {getButtonText()}
+              {getButtonIcon()}
             </button>
           </div>
         ))}
