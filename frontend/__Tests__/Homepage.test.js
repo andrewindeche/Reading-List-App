@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect'; // For additional matchers like toBeInTheDocument
-import HomePage from './HomePage';
+import '@testing-library/jest-dom/extend-expect';
+import HomePage from 'pages/homepage';
 
 describe('HomePage component', () => {
   const mockAddToReadingList = jest.fn();
