@@ -6,6 +6,26 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const numberOfBooks = 3;
 const ReadingList = ({ onAddToReadingList }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isRemoved, setIsRemoved] = useState(false);
+
+  const handleRemoveFromList = () => {
+    setIsRemoved(true);
+    onAddToReadingList(book);
+  };
+
+  const getBackgroundColor = () => {
+    switch (true) {
+    case isRemoved:
+      return '#5ACCCC';
+    default:
+      return 'white';
+    }
+  };
+
+  const getButtonText = () => {
+    if (isRemoved) return 'Removed';
+    return 'Add to Library';
+  };
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -52,14 +72,14 @@ const ReadingList = ({ onAddToReadingList }) => {
                 onMouseLeave={handleMouseLeave}
                 style={{
                   backgroundColor: isHovered ? 'white' : '#5ACCCC',
-                  color: 'white',
+                  color: isHovered ? '#5ACCCC' : 'white',
                   display: 'flex',
                   alignItems: 'center',
                   padding: '5px 10px',
                   justifyContent: 'center',
                 }}
               >
-                {isHovered ? 'Remove' : 'Added'}
+                {isHovered ? 'Remove' : 'Added' }
                 {isHovered ? (
                   <DeleteIcon style={{ marginLeft: '6px' }} />
                 ) : (
