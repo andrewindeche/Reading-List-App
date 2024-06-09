@@ -19,7 +19,7 @@ const SEARCH_BOOK = gql`
 
 const Searchbar = ({ setSearchResults }) => {
   const [searchText, setSearchText] = useState('');
-  const [searchBook, { loading, error, data }] = useLazyQuery(SEARCH_BOOK);
+  const [searchBook, { data }] = useLazyQuery(SEARCH_BOOK);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
@@ -58,7 +58,15 @@ const Searchbar = ({ setSearchResults }) => {
   const handleItemClick = (suggestion) => {
     setSearchText(suggestion.title);
     setDropdownVisible(false);
-    handleSearch();
+    navigate(`/searchresults/${suggestion.title}`);
+  };
+
+  const handleKeyDown = (e, suggestion) => {
+    if (e.key === 'Enter') {
+      setSearchText(suggestion.title);
+      setDropdownVisible(false);
+      navigate(`/searchresults/${suggestion.title}`);
+    }
   };
 
   return (
@@ -71,6 +79,11 @@ const Searchbar = ({ setSearchResults }) => {
         placeholder="Search For Book By Title"
         value={searchText}
         onChange={handleSearchChange}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleSearch();
+          }
+        }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

@@ -17,7 +17,7 @@ const GET_SEARCH_RESULT = gql`
   }
 `;
 
-const SearchResults = ({ onAddToReadingList }) => {
+const SearchResults = () => {
   const { query } = useParams();
   const { loading, error, data } = useQuery(GET_SEARCH_RESULT, {
     variables: { title: query },
@@ -107,9 +107,6 @@ const SearchResults = ({ onAddToReadingList }) => {
       </div>
     </div>
   );
-};
-SearchResults.propTypes = {
-  onAddToReadingList: PropTypes.func.isRequired,
 };
 
 export default SearchResults;
