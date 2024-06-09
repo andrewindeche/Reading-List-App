@@ -33,7 +33,7 @@ const ReadingList = () => {
         <p className="readingListResults">
           {readingList.length}
           {' '}
-          Results for
+          Books in Reading List for
           {' '}
           <span className="resultquery">Ello User</span>
         </p>
