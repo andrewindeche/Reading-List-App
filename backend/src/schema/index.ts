@@ -1,6 +1,6 @@
 export const typeDefs = `#graphql
   type Book {
-    title: String
+    title: String!
     author: String
     coverPhotoURL: String
     readingLevel: String
@@ -8,5 +8,6 @@ export const typeDefs = `#graphql
 
   type Query {
     books(searchText: String): [Book]
+    book(title: String!): Book
   }
 `;

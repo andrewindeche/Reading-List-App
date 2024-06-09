@@ -6,6 +6,7 @@ import {
   ApolloClient, InMemoryCache, ApolloProvider, createHttpLink,
 } from '@apollo/client';
 import App from './App';
+import { ReadingListProvider } from './components/listcontext';
 
 const appNode = createRoot(document.getElementById('ReadingList'));
 const client = new ApolloClient({
@@ -18,9 +19,12 @@ const client = new ApolloClient({
 const Root = () => (
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ReadingListProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ReadingListProvider>
+      ,
     </ApolloProvider>
   </React.StrictMode>
 );

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import {BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './style.css';
-import HomePage from './pages/Homepage';
-import Navbar from './components/Navbar';
-import Readinglist from './pages/ReadingList';
-import Searchbar from './components/Searchbar';
-import SearchResults from './pages/Searchresults';
-import ErrorPage from './pages/Errorpage';
+import HomePage from './pages/homepage';
+import NavBar from './components/navbar';
+import ReadingList from './pages/readinglist';
+import SearchBar from './components/searchbar';
+import SearchResults from './pages/searchresults';
+import ErrorPage from './pages/errorpage';
 
 const App = () => {
   const [readingList, setReadingList] = useState([]);
@@ -19,12 +19,12 @@ const App = () => {
   };
   return (
     <>
-      <Navbar />
-      <Searchbar setSearchResults={setSearchResults} />
+      <NavBar />
+      <SearchBar searchResults={searchResults} setSearchResults={setSearchResults} />
       <Routes>
-        <Route path="/results/:query" element={<SearchResults onAddToReadingList={handleAddToReadingList} />} />
+        <Route path="/searchresults/:query" element={<SearchResults onAddToReadingList={handleAddToReadingList} />} />
         <Route path="/" element={<HomePage onAddToReadingList={handleAddToReadingList} />} />
-        <Route path="/readinglist" element={<Readinglist />} />
+        <Route path="/readinglist" element={<ReadingList />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

@@ -4,10 +4,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import { InputAdornment, TextField } from '@mui/material';
 import { useLazyQuery, gql } from '@apollo/client';
+import SearchSuggestions from './suggestions';
 
 const SEARCH_BOOK = gql`
   query SearchBook($title: String!) {
-    book(title: $title) {
+    books(searchText: $title) {
       title
       author
       coverPhotoURL
@@ -16,9 +17,9 @@ const SEARCH_BOOK = gql`
   }
 `;
 
-const SearchBar = ({ setSearchResults }) => {
+const Searchbar = ({ setSearchResults }) => {
   const [searchText, setSearchText] = useState('');
-  const [searchBook, { loading, error, data }] = useLazyQuery(SEARCH_BOOK);
+  const [searchBook, { data }] = useLazyQuery(SEARCH_BOOK);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
@@ -36,42 +37,19 @@ const SearchBar = ({ setSearchResults }) => {
 
   useEffect(() => {
     if (data && data.books) {
-      setSearchResults([data.book]);
-      const lowerCaseSearchText = searchText.toLowerCase();
-
-      const prioritizedSuggestions = data.books
-        .filter((book) => book.title.toLowerCase().startsWith(lowerCaseSearchText))
-        .sort((a, b) => a.title.localeCompare(b.title));
-
-      const otherSuggestions = data.books
-        .filter((book) => !book.title.toLowerCase().startsWith(lowerCaseSearchText))
-        .filter((book) => book.title.toLowerCase().includes(lowerCaseSearchText))
-        .sort((a, b) => a.title.localeCompare(b.title));
-
-      setFilteredSuggestions([...prioritizedSuggestions, ...otherSuggestions]);
+      setFilteredSuggestions(data.books);
     } else {
-      setSearchResults([]);
+      setFilteredSuggestions([]);
     }
-  }, [data, setSearchResults, searchText]);
+  }, [data]);
 
   const handleSearchChange = (e) => {
-    setSearchText(e.target.value);
+    const { value } = e.target;
+    setSearchText(value);
   };
 
   const handleSearch = () => {
     if (searchText.trim().length > 0) {
-      searchBook({ variables: { title: searchText } });
-      navigate(`/searchresults/${searchText}`);
-    } else {
-      setSearchResults([]);
-      const exactMatch = filteredSuggestions.find(
-        (suggestion) => suggestion.title.toLowerCase() === searchText.toLowerCase(),
-      );
-      if (exactMatch) {
-        setSearchResults([exactMatch]);
-      } else {
-        setSearchResults(filteredSuggestions);
-      }
       navigate(`/searchresults/${searchText}`);
     }
     setDropdownVisible(false);
@@ -80,25 +58,16 @@ const SearchBar = ({ setSearchResults }) => {
   const handleItemClick = (suggestion) => {
     setSearchText(suggestion.title);
     setDropdownVisible(false);
-    handleSearch();
+    navigate(`/searchresults/${suggestion.title}`);
   };
 
   const handleKeyDown = (e, suggestion) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      handleItemClick(suggestion);
+    if (e.key === 'Enter') {
+      setSearchText(suggestion.title);
+      setDropdownVisible(false);
+      navigate(`/searchresults/${suggestion.title}`);
     }
   };
-
-  if (loading) return <p>Loading...</p>;
-  if (error) {
-    return (
-      <p>
-        Error:
-        {' '}
-        {error.message}
-      </p>
-    );
-  }
 
   return (
     <div className="searchBarContainer">
@@ -110,6 +79,11 @@ const SearchBar = ({ setSearchResults }) => {
         placeholder="Search For Book By Title"
         value={searchText}
         onChange={handleSearchChange}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleSearch();
+          }
+        }}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -121,26 +95,28 @@ const SearchBar = ({ setSearchResults }) => {
       <button className="searchButton" type="button" onClick={handleSearch}>Search</button>
       {dropdownVisible && (
         <div className="dropdown">
-          {filteredSuggestions.map((suggestion) => (
-            <div
-              key={suggestion.title}
-              className="dropdownItem"
-              role="button"
-              tabIndex={0}
-              onClick={() => handleItemClick(suggestion)}
-              onKeyDown={(e) => handleKeyDown(e, suggestion)}
-            >
-              <img src={suggestion.coverPhotoURL} alt={suggestion.title} className="dropdownItemImage" />
-              <p className="dropdownItemText">{suggestion.title}</p>
-            </div>
-          ))}
+          {filteredSuggestions
+            .filter((suggestion) => {
+              const lowerCaseTitle = suggestion.title.toLowerCase();
+              const lowerCaseSearchText = searchText.toLowerCase();
+              return lowerCaseTitle.startsWith(lowerCaseSearchText);
+            })
+            .map((suggestion) => (
+              <SearchSuggestions
+                key={suggestion.title}
+                suggestion={suggestion}
+                onClick={handleItemClick}
+                onKeyDown={(e) => handleKeyDown(e, suggestion)}
+              />
+            ))}
         </div>
       )}
     </div>
   );
 };
-SearchBar.propTypes = {
+
+Searchbar.propTypes = {
   setSearchResults: PropTypes.func.isRequired,
 };
 
-export default SearchBar;
+export default Searchbar;
