@@ -2,38 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useReadingList } from '../components/listcontext';
 
-const numberOfBooks = 3;
-const ReadingList = ({ onAddToReadingList }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const [isRemoved, setIsRemoved] = useState(false);
+const ReadingList = () => {
+  const { readingList, removeFromReadingList } = useReadingList();
 
-  const handleRemoveFromList = () => {
-    setIsRemoved(true);
-    onAddToReadingList(book);
-  };
-
-  const getBackgroundColor = () => {
-    switch (true) {
-    case isRemoved:
-      return '#5ACCCC';
-    default:
-      return 'white';
-    }
-  };
-
-  const getButtonText = () => {
-    if (isRemoved) return 'Removed';
-    return 'Add to Library';
-  };
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
   return (
     <div className="Readinglist">
       <img
@@ -43,49 +16,46 @@ const ReadingList = ({ onAddToReadingList }) => {
       />
       <div className="readingListContainer">
         <p className="readingListResults">
-          12 ReadingList Results for
+          {readingList.length}
+          {' '}
+          Results for
           {' '}
           <span className="resultquery">Book1</span>
         </p>
         <div className="imageRow">
-          {[...Array(numberOfBooks)].map((_, index) => (
-            <div key={index} className="imageContainer">
+          {readingList.map((book) => (
+            <div key={book.title} className="imageContainer">
               <img
-                src="https://static.vecteezy.com/system/resources/previews/021/844/396/non_2x/error-404-page-not-found-funny-little-man-chibi-sits-thoughtfully-next-to-a-broken-wire-illustration-for-design-design-vector.jpg"
-                alt="Error"
-                className="Error"
+                src={book.coverPhotoURL}
+                alt={book.title}
               />
               <p>
                 Title of Book
                 {' '}
-                {index + 1}
+                {book.title}
               </p>
               <p>
                 By Author
                 {' '}
-                {index + 1}
+                {book.author}
               </p>
               <button
                 type="button"
                 id="readinglistbutton"
-                onClick={() => onAddToReadingList({ title: `Title of Book ${index + 1}`, author: `Author ${index + 1}` })}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                onClick={() => removeFromReadingList(book)}
                 style={{
-                  backgroundColor: isHovered ? 'white' : '#5ACCCC',
-                  color: isHovered ? '#5ACCCC' : 'white',
+                  backgroundColor: '#5ACCCC',
+                  color: 'white',
                   display: 'flex',
                   alignItems: 'center',
                   padding: '5px 10px',
                   justifyContent: 'center',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
                 }}
               >
-                {isHovered ? 'Remove' : 'Added' }
-                {isHovered ? (
-                  <DeleteIcon style={{ marginLeft: '6px' }} />
-                ) : (
-                  <CheckCircleIcon style={{ marginLeft: '6px', color: 'white' }} />
-                )}
+                Remove
+                <DeleteIcon style={{ marginLeft: '6px' }} />
               </button>
             </div>
           ))}
@@ -94,7 +64,5 @@ const ReadingList = ({ onAddToReadingList }) => {
     </div>
   );
 };
-ReadingList.propTypes = {
-  onAddToReadingList: PropTypes.func.isRequired,
-};
+
 export default ReadingList;

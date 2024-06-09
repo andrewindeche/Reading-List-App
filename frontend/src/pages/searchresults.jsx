@@ -4,6 +4,7 @@ import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useReadingList } from '../components/listcontext';
 
 const GET_SEARCH_RESULT = gql`
   query GetSearchResult($title: String!) {
@@ -17,47 +18,13 @@ const GET_SEARCH_RESULT = gql`
 `;
 
 const SearchResults = ({ onAddToReadingList }) => {
-  const [isAdded, setIsAdded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleAddToList = () => {
-    setIsAdded(true);
-    onAddToReadingList(book);
-  };
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  const getBackgroundColor = () => {
-    switch (true) {
-    case isAdded:
-      return '#5ACCCC';
-    case isHovered:
-      return '#CFFAFA';
-    default:
-      return 'white';
-    }
-  };
-
-  const getButtonText = () => {
-    if (isAdded) return 'Added';
-    return 'Add to Library';
-  };
-
-  const getButtonIcon = () => {
-    if (isAdded) return <CheckCircleIcon style={{ marginLeft: '10px' }} />;
-    return <LibraryAddIcon style={{ marginLeft: '10px' }} />;
-  };
-
   const { query } = useParams();
   const { loading, error, data } = useQuery(GET_SEARCH_RESULT, {
     variables: { title: query },
   });
+  const { addToReadingList, readingList } = useReadingList();
+  const [hovered, setHovered] = useState(false);
+
   if (loading) return <p>Loading...</p>;
   if (error) {
     return (
@@ -71,6 +38,42 @@ const SearchResults = ({ onAddToReadingList }) => {
   if (!data || !data.book) return <p>No book found.</p>;
 
   const { book } = data;
+  const isAdded = readingList.some((b) => b.title === book.title);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) {
+    return (
+      <p>
+        Error:
+        {' '}
+        {error.message}
+      </p>
+    );
+  }
+  if (!data || !data.book) return <p>No book found.</p>;
+
+  const getButtonStyles = () => {
+    let backgroundColor = 'white';
+    let color = '#335C6E';
+    if (isAdded) {
+      backgroundColor = '#5ACCCC';
+      color = 'white';
+    } else if (hovered) {
+      backgroundColor = '#CFFAFA';
+    }
+
+    return {
+      display: 'flex',
+      alignSelf: 'center',
+      justifyContent: 'center',
+      padding: '5px 10px',
+      borderRadius: '15px',
+      fontWeight: 'bold',
+      cursor: 'pointer',
+      backgroundColor,
+      color,
+    };
+  };
 
   return (
     <div className="resultsPageContainer">
@@ -91,23 +94,13 @@ const SearchResults = ({ onAddToReadingList }) => {
             </p>
             <button
               type="button"
-              onClick={handleAddToList}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              style={{
-                display: 'flex',
-                alignSelf: 'center',
-                justifyContent: 'center',
-                padding: '5px 10px',
-                borderRadius: '15px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-                backgroundColor: getBackgroundColor(),
-                color: isAdded ? 'white' : '#335C6E',
-              }}
+              onClick={() => addToReadingList(book)}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+              style={getButtonStyles()}
             >
-              {getButtonText()}
-              {getButtonIcon()}
+              {isAdded ? 'Added' : 'Add to Library'}
+              {isAdded ? <CheckCircleIcon style={{ marginLeft: '10px' }} /> : <LibraryAddIcon style={{ marginLeft: '10px' }} />}
             </button>
           </div>
         </div>
