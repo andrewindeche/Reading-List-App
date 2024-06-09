@@ -4,6 +4,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import { InputAdornment, TextField } from '@mui/material';
 import { useLazyQuery, gql } from '@apollo/client';
+import SearchSuggestions from './suggestions';
 
 const SEARCH_BOOK = gql`
   query SearchBook($title: String!) {
@@ -122,17 +123,12 @@ const SearchBar = ({ setSearchResults }) => {
       {dropdownVisible && (
         <div className="dropdown">
           {filteredSuggestions.map((suggestion) => (
-            <div
+            <SearchSuggestions
               key={suggestion.title}
-              className="dropdownItem"
-              role="button"
-              tabIndex={0}
-              onClick={() => handleItemClick(suggestion)}
-              onKeyDown={(e) => handleKeyDown(e, suggestion)}
-            >
-              <img src={suggestion.coverPhotoURL} alt={suggestion.title} className="dropdownItemImage" />
-              <p className="dropdownItemText">{suggestion.title}</p>
-            </div>
+              suggestion={suggestion}
+              onClick={handleItemClick}
+              onKeyDown={handleKeyDown}
+            />
           ))}
         </div>
       )}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const numberOfBooks = 3;
-const Readinglist = ({ onAddToReadingList }) => (
+const ReadingList = ({ onAddToReadingList }) => (
   <div className="Readinglist">
     <img
       src="https://www.shutterstock.com/image-vector/young-cute-monkey-baby-sweet-600nw-2270033121.jpg"
@@ -41,4 +41,4 @@ const Readinglist = ({ onAddToReadingList }) => (
     </div>
   </div>
 );
-export default Readinglist;
+export default ReadingList;

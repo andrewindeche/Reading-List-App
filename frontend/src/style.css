@@ -111,6 +111,7 @@ h2 {
 .navBar{
     display: flex;
     flex-direction: row;
+    margin: 0.2em;
     gap:3rem;
     font-size: larger;
     color:#335C6E;

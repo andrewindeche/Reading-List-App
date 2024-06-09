@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const Navbar = () => (
+const NavBar = () => (
   <div className="navBar">
     <img className="navImage" src="https://ml.globenewswire.com/Resource/Download/671a4959-db29-4139-a53e-5ca7e3294702?size=2" alt="Ello Logo" />
     <span className="navLinks">
@@ -21,4 +21,4 @@ const Navbar = () => (
     </span>
   </div>
 );
-export default Navbar;
+export default NavBar;
