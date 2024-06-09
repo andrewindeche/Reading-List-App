@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useReadingList } from '../components/listcontext';
 
 const ReadingList = () => {
   const { readingList, removeFromReadingList } = useReadingList();
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div className="Readinglist">
@@ -30,12 +30,11 @@ const ReadingList = () => {
                 alt={book.title}
               />
               <p>
-                Title of Book
                 {' '}
                 {book.title}
               </p>
               <p>
-                By Author
+                By:
                 {' '}
                 {book.author}
               </p>
@@ -43,19 +42,30 @@ const ReadingList = () => {
                 type="button"
                 id="readinglistbutton"
                 onClick={() => removeFromReadingList(book.title)}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
                 style={{
-                  backgroundColor: '#5ACCCC',
-                  color: 'white',
+                  backgroundColor: isHovered ? '#5ACCCC' : 'white',
+                  color: isHovered ?  'white' : '#5ACCCC' ,
                   display: 'flex',
                   alignItems: 'center',
                   padding: '5px 10px',
                   justifyContent: 'center',
-                  borderRadius: '5px',
+                  borderRadius: '15px',
                   cursor: 'pointer',
                 }}
               >
-                Remove
-                <DeleteIcon style={{ marginLeft: '6px' }} />
+                {isHovered ? (
+                  <>
+                    <DeleteIcon style={{ marginRight: '6px' }} />
+                    Remove
+                  </>
+                ) : (
+                  <>
+                    <CheckCircleIcon style={{ marginRight: '6px' }} />
+                    Added
+                  </>
+                )}
               </button>
             </div>
           ))}
