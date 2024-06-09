@@ -1,13 +1,13 @@
-import React, { useState, useEffect,  useRef  } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import { InputAdornment, TextField } from '@mui/material';
 import { useLazyQuery, gql } from '@apollo/client';
 
-const SEARCH_BOOKS = gql`
-  query SearchBooks($searchText: String!) {
-    books(searchText: $searchText) {
+const SEARCH_BOOK = gql`
+  query SearchBook($title: String!) {
+    book(title: $title) {
       title
       author
       coverPhotoURL
@@ -18,7 +18,7 @@ const SEARCH_BOOKS = gql`
 
 const Searchbar = ({ setSearchResults }) => {
   const [searchText, setSearchText] = useState('');
-  const [searchBooks, { loading, error, data }] = useLazyQuery(SEARCH_BOOKS);
+  const [searchBook, { loading, error, data }] = useLazyQuery(SEARCH_BOOK);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
@@ -26,16 +26,17 @@ const Searchbar = ({ setSearchResults }) => {
 
   useEffect(() => {
     if (searchText.length > 0) {
-      searchBooks({ variables: { searchText } });
+      searchBook({ variables: { title: searchText } });
       setDropdownVisible(true);
     } else {
       setDropdownVisible(false);
       setSearchResults([]);
     }
-  }, [searchText, searchBooks, setSearchResults]);
+  }, [searchText, searchBook, setSearchResults]);
 
   useEffect(() => {
     if (data && data.books) {
+      setSearchResults([data.book]);
       const lowerCaseSearchText = searchText.toLowerCase();
 
       const prioritizedSuggestions = data.books
@@ -48,6 +49,8 @@ const Searchbar = ({ setSearchResults }) => {
         .sort((a, b) => a.title.localeCompare(b.title));
 
       setFilteredSuggestions([...prioritizedSuggestions, ...otherSuggestions]);
+    } else {
+      setSearchResults([]);
     }
   }, [data, setSearchResults, searchText]);
 
@@ -56,9 +59,11 @@ const Searchbar = ({ setSearchResults }) => {
   };
 
   const handleSearch = () => {
-    if (searchText.trim().length === 0) {
-      setSearchResults([]);
+    if (searchText.trim().length > 0) {
+      searchBook({ variables: { title: searchText } });
+      navigate(`/searchresults/${searchText}`);
     } else {
+      setSearchResults([]);
       const exactMatch = filteredSuggestions.find(
         (suggestion) => suggestion.title.toLowerCase() === searchText.toLowerCase(),
       );

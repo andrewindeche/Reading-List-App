@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
-const GET_SEARCH_RESULTS = gql`
-  query GetSearchResults($searchText: String!) {
-    books(searchText: $searchText) {
+const GET_SEARCH_RESULT = gql`
+  query GetSearchResult($title: String!) {
+    book(title: $title) {
       title
       author
       coverPhotoURL
@@ -16,8 +16,8 @@ const GET_SEARCH_RESULTS = gql`
 
 const SearchResults = ({ onAddToReadingList }) => {
   const { query } = useParams();
-  const { loading, error, data } = useQuery(GET_SEARCH_RESULTS, {
-    variables: { searchText: query },
+  const { loading, error, data } = useQuery(GET_SEARCH_RESULT, {
+    variables: { title: query },
   });
   if (loading) return <p>Loading...</p>;
   if (error) {
@@ -29,6 +29,9 @@ const SearchResults = ({ onAddToReadingList }) => {
       </p>
     );
   }
+  if (!data || !data.book) return <p>No book found.</p>;
+
+  const { book } = data;
 
   return (
     <div className="resultsPageContainer">
@@ -38,22 +41,20 @@ const SearchResults = ({ onAddToReadingList }) => {
         &quot;
       </p>
       <div className="imageGrid">
-        {data.books.map((book, index) => (
-          <div key={`${book.title}-${index}`} className="imageCard">
-            <img src={book.coverPhotoURL} alt={book.title} />
-            <div className="bookInfo">
-              <p className="bookTitle">{book.title}</p>
-              <p className="bookAuthor">
-                By:
-                {' '}
-                {book.author}
-              </p>
-              <button type="button" onClick={() => onAddToReadingList(book)}>
-                Add To Reading List
-              </button>
-            </div>
+        <div className="imageCard">
+          <img src={book.coverPhotoURL} alt={book.title} />
+          <div className="bookInfo">
+            <p className="bookTitle">{book.title}</p>
+            <p className="bookAuthor">
+              By:
+              {' '}
+              {book.author}
+            </p>
+            <button type="button" onClick={() => onAddToReadingList(book)}>
+              Add To Reading List
+            </button>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

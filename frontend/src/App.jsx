@@ -20,7 +20,7 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <Searchbar setSearchResults={setSearchResults} />
+      <Searchbar searchResults={searchResults} setSearchResults={setSearchResults} />
       <Routes>
         <Route path="/searchresults/:query" element={<SearchResults onAddToReadingList={handleAddToReadingList} />} />
         <Route path="/" element={<HomePage onAddToReadingList={handleAddToReadingList} />} />
