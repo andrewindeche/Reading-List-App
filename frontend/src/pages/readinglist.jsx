@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -20,7 +20,7 @@ const ReadingList = () => {
           {' '}
           Results for
           {' '}
-          <span className="resultquery">Book1</span>
+          <span className="resultquery">Ello User</span>
         </p>
         <div className="imageRow">
           {readingList.map((book) => (
@@ -42,7 +42,7 @@ const ReadingList = () => {
               <button
                 type="button"
                 id="readinglistbutton"
-                onClick={() => removeFromReadingList(book)}
+                onClick={() => removeFromReadingList(book.title)}
                 style={{
                   backgroundColor: '#5ACCCC',
                   color: 'white',
