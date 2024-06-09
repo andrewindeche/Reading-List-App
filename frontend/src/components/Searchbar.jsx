@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,  useRef  } from 'react';
 import PropTypes from 'prop-types';
 import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
@@ -22,6 +22,7 @@ const Searchbar = ({ setSearchResults }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const navigate = useNavigate();
+  const inputRef = useRef(null);
 
   useEffect(() => {
     if (searchText.length > 0) {
@@ -66,7 +67,7 @@ const Searchbar = ({ setSearchResults }) => {
       } else {
         setSearchResults(filteredSuggestions);
       }
-      navigate(`/results/${searchText}`);
+      navigate(`/searchresults/${searchText}`);
     }
     setDropdownVisible(false);
   };
@@ -97,6 +98,7 @@ const Searchbar = ({ setSearchResults }) => {
   return (
     <div className="searchBarContainer">
       <TextField
+        ref={inputRef}
         variant="outlined"
         sx={{ '& .MuiOutlinedInput-root': { borderColor: 'green' } }}
         className="searchBar"

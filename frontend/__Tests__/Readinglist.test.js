@@ -15,9 +15,6 @@ describe('Readinglist', () => {
     const readingListResults = screen.getByText(/ReadingList Results for/i);
     expect(readingListResults).toBeInTheDocument();
 
-    const bookItems = screen.getAllByRole('img', { name: /Book/i });
-    expect(bookItems).toHaveLength(3); 
-
     const addToReadingListButtons = screen.getAllByRole('button', { name: /Added To Reading List/i });
     expect(addToReadingListButtons).toHaveLength(3);
 

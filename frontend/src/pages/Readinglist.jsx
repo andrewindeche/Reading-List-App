@@ -17,7 +17,11 @@ const Readinglist = ({ onAddToReadingList }) => (
       <div className="imageRow">
         {[...Array(numberOfBooks)].map((_, index) => (
           <div key={index} className="imageContainer">
-            <img src={image1} alt={`Book ${index + 1}`} />
+            <img
+              src="https://static.vecteezy.com/system/resources/previews/021/844/396/non_2x/error-404-page-not-found-funny-little-man-chibi-sits-thoughtfully-next-to-a-broken-wire-illustration-for-design-design-vector.jpg"
+              alt="Error"
+              className="Error"
+            />
             <p>
               Title of Book
               {' '}
