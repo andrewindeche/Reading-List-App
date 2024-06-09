@@ -23,7 +23,7 @@ const Results = ({ searchText }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const { addToReadingList, readingList } = useReadingList();
-  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredButtons, setHoveredButtons] = useState([]);
 
   const handleAddToList = (book) => {
     addToReadingList(book);
@@ -31,7 +31,7 @@ const Results = ({ searchText }) => {
 
   const getBackgroundColor = (book) => {
     switch (true) {
-    case isHovered:
+    case hoveredButtons.includes(book.title):
       return '#CFFAFA';
     case readingList.some((b) => b.title === book.title):
       return '#5ACCCC';
@@ -50,6 +50,14 @@ const Results = ({ searchText }) => {
     }
     return undefined;
   }, [data]);
+
+  const handleMouseEnter = (book) => {
+    setHoveredButtons((prevButtons) => [...prevButtons, book.title]);
+  };
+
+  const handleMouseLeave = (book) => {
+    setHoveredButtons((prevButtons) => prevButtons.filter((button) => button !== book.title));
+  };
 
   if (loading) return <p>Loading...</p>;
   if (error) {
@@ -92,8 +100,8 @@ const Results = ({ searchText }) => {
                 type="button"
                 id="resultsbutton"
                 onClick={() => handleAddToList(book)}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                onMouseEnter={() => handleMouseEnter(book)}
+                onMouseLeave={() => handleMouseLeave(book)}
                 style={{
                   display: 'flex',
                   alignSelf: 'center',
@@ -106,8 +114,12 @@ const Results = ({ searchText }) => {
                   color: isAdded ? 'white' : '#335C6E',
                 }}
               >
-                {readingList.some((b) => b.title === book.title) ? 'Added' : 'Add to Library'}
-                {readingList.some((b) => b.title === book.title) ? <CheckCircleIcon style={{ marginLeft: '10px' }} /> : <LibraryAddIcon style={{ marginLeft: '10px' }} />}
+                {isAdded ? 'Added' : 'Add to Library'}
+                {isAdded ? (
+                  <CheckCircleIcon style={{ marginLeft: '10px' }} />
+                ) : (
+                  <LibraryAddIcon style={{ marginLeft: '10px' }} />
+                )}
               </button>
             </div>
           );

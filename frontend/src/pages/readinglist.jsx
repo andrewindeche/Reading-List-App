@@ -5,8 +5,23 @@ import { useReadingList } from '../components/listcontext';
 
 const ReadingList = () => {
   const { readingList, removeFromReadingList } = useReadingList();
-  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredButtons, setHoveredButtons] = useState(new Array(readingList.length).fill(false));
 
+  const handleRemove = (title) => {
+    removeFromReadingList(title);
+  };
+
+  const handleMouseEnter = (index) => {
+    const newHoveredButtons = [...hoveredButtons];
+    newHoveredButtons[index] = true;
+    setHoveredButtons(newHoveredButtons);
+  };
+
+  const handleMouseLeave = (index) => {
+    const newHoveredButtons = [...hoveredButtons];
+    newHoveredButtons[index] = false;
+    setHoveredButtons(newHoveredButtons);
+  };
   return (
     <div className="Readinglist">
       <img
@@ -23,7 +38,7 @@ const ReadingList = () => {
           <span className="resultquery">Ello User</span>
         </p>
         <div className="imageRow">
-          {readingList.map((book) => (
+          {readingList.map((book, index) => (
             <div key={book.title} className="imageContainer">
               <img
                 src={book.coverPhotoURL}
@@ -41,12 +56,12 @@ const ReadingList = () => {
               <button
                 type="button"
                 id="readinglistbutton"
-                onClick={() => removeFromReadingList(book.title)}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                onClick={() => handleRemove(book.title)}
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={() => handleMouseLeave(index)}
                 style={{
-                  backgroundColor: isHovered ? '#5ACCCC' : 'white',
-                  color: isHovered ?  'white' : '#5ACCCC' ,
+                  backgroundColor: hoveredButtons[index] ? 'white' : '#5ACCCC',
+                  color: hoveredButtons[index] ? '#5ACCCC' : 'white',
                   display: 'flex',
                   alignItems: 'center',
                   padding: '5px 10px',
@@ -55,7 +70,7 @@ const ReadingList = () => {
                   cursor: 'pointer',
                 }}
               >
-                {isHovered ? (
+                {hoveredButtons[index] ? (
                   <>
                     <DeleteIcon style={{ marginRight: '6px' }} />
                     Remove
