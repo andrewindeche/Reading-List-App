@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useQuery, gql } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';

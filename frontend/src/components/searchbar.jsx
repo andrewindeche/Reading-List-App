@@ -96,7 +96,11 @@ const Searchbar = ({ setSearchResults }) => {
       {dropdownVisible && (
         <div className="dropdown">
           {filteredSuggestions
-            .filter((suggestion) => suggestion.title.toLowerCase().startsWith(searchText.toLowerCase()))
+            .filter((suggestion) => {
+              const lowerCaseTitle = suggestion.title.toLowerCase();
+              const lowerCaseSearchText = searchText.toLowerCase();
+              return lowerCaseTitle.startsWith(lowerCaseSearchText);
+            })
             .map((suggestion) => (
               <SearchSuggestions
                 key={suggestion.title}
