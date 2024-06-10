@@ -9,6 +9,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: {
     main: './src/index.jsx',
+  },optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   optimization: {
     minimize: true,
