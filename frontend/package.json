@@ -52,11 +52,8 @@
   "homepage": "https://github.com/andrewindechemain/Reading-List-App#readme",
   "dependencies": {
     "@apollo/client": "^3.10.4",
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.19",
     "@mui/material": "^5.15.19",
-    "axios": "^1.7.2",
     "babel-loader": "^9.1.3",
     "babel-preset": "^1.1.7",
     "babel-preset-react": "^6.24.1",

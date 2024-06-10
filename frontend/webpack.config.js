@@ -7,6 +7,10 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 module.exports = {
   entry: {
     main: './src/index.jsx',
+  },optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
