@@ -6,7 +6,8 @@ import NavBar from './components/navbar';
 import ReadingList from './pages/readinglist';
 import SearchBar from './components/searchbar';
 import SearchResults from './pages/searchresults';
-import ErrorPage from './pages/errorpage';
+
+const ErrorPage = React.lazy(() => import('./pages/errorpage'));
 
 const App = () => {
   const [readingList, setReadingList] = useState([]);

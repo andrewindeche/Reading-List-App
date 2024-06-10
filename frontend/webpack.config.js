@@ -3,11 +3,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
     main: './src/index.jsx',
-  },optimization: {
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
     splitChunks: {
       chunks: 'all',
     },
@@ -35,6 +39,16 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|webp)$/i,
         use: ['file-loader'],
+        use: [
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|ttf)$/i,
