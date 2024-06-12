@@ -1,5 +1,5 @@
 import React, {
-  createContext, useContext, useState, useMemo,
+  createContext, useContext, useState, useMemo,useCallback
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -10,21 +10,22 @@ export const useReadingList = () => useContext(ReadingListContext);
 export const ReadingListProvider = ({ children }) => {
   const [readingList, setReadingList] = useState([]);
 
-  const addToReadingList = (book) => {
-    if (!readingList.some((b) => b.title === book.title)) {
-      setReadingList((prevList) => [...prevList, book]);
-    }
-  };
+  const addToReadingList = useCallback((book) => {
+    setReadingList((prevList) => {
+      if (prevList.some((b) => b.title === book.title)) return prevList;
+      return [...prevList, book];
+    });
+  }, []);
 
-  const removeFromReadingList = (title) => {
+  const removeFromReadingList = useCallback((title) => {
     setReadingList((prevList) => prevList.filter((book) => book.title !== title));
-  };
+  }, []);;
 
   const contextValue = useMemo(() => ({
     readingList,
     addToReadingList,
     removeFromReadingList,
-  }), [readingList]);
+  }), [readingList, addToReadingList, removeFromReadingList]);
 
   return (
     <ReadingListContext.Provider value={contextValue}>

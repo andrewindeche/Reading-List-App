@@ -27,14 +27,14 @@ describe('ReadingListProvider', () => {
     const book1 = { title: 'Book 1', author: 'Author 1' };
     const book2 = { title: 'Book 2', author: 'Author 2' };
 
-    const { container } = render(
+    render(
       <ReadingListProvider>
         <TestComponent book={book1} />
         <TestComponent book={book2} />
       </ReadingListProvider>
     );
 
-    expect(container.textContent).toContain('Book 1 by Author 1');
-    expect(container.textContent).toContain('Book 2 by Author 2');
+    expect(screen.getByText('Book 1 by Author 1')).toBeInTheDocument();
+    expect(screen.getByText('Book 2 by Author 2')).toBeInTheDocument();
   });
 });
