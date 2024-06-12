@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from '@apollo/client/testing';
 import Searchbar from 'components/searchbar';
 import { SEARCH_BOOK } from 'components/searchbar';
+import '@testing-library/jest-dom';
 
 const setSearchResultsMock = jest.fn();
 
@@ -11,13 +12,19 @@ const mocks = [
   {
     request: {
       query: SEARCH_BOOK,
-      variables: { title: 'test' },
+      variables: {
+        title: 'example',
+      },
     },
     result: {
       data: {
         books: [
-          { title: 'Book 1', author: 'Author 1', coverPhotoURL: 'book1.jpg' },
-          { title: 'Book 2', author: 'Author 2', coverPhotoURL: 'book2.jpg' },
+          {
+            title: 'Example Book',
+            author: 'Author Name',
+            coverPhotoURL: 'http://example.com/cover.jpg',
+            readingLevel: 'Intermediate',
+          },
         ],
       },
     },
@@ -52,18 +59,34 @@ describe('Searchbar', () => {
     expect(searchInput.value).toBe('test');
   });
 
-  test('triggers search on button click', () => {
+  test('triggers search on button click', async () => {
+    const setSearchResultsMock = jest.fn();
     render(
       <MemoryRouter>
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <Searchbar setSearchResults={setSearchResultsMock} />
-        </MockedProvider>
-      </MemoryRouter>
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <Searchbar setSearchResults={setSearchResultsMock} />
+      </MockedProvider>
+    </MemoryRouter>
     );
 
-    const searchButton = screen.getByText('Search');
-    fireEvent.click(searchButton);
-    expect(setSearchResultsMock).toHaveBeenCalled();
+    const input = screen.getByPlaceholderText('Search...');
+    fireEvent.change(input, { target: { value: 'example' } });
+
+    const button = screen.getByText('Search'); 
+    fireEvent.click(button);
+
+    await waitFor(() => {
+      expect(setSearchResultsMock).toHaveBeenCalled();
+    });
+
+    expect(setSearchResultsMock).toHaveBeenCalledWith([
+      {
+        title: 'Example Book',
+        author: 'Author Name',
+        coverPhotoURL: 'http://example.com/cover.jpg',
+        readingLevel: 'Intermediate',
+      },
+    ]);
   });
 
   test('navigates to search results on enter key press', () => {

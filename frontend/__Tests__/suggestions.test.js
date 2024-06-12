@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import SearchSuggestions from 'components/suggestions';
+import '@testing-library/jest-dom';
 
 const suggestion = {
   title: 'Test Book',

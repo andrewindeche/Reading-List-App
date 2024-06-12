@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useReadingList } from '../components/listcontext';
+import { useReadingList } from 'components/listcontext';
 
 const ReadingList = () => {
   const { readingList, removeFromReadingList } = useReadingList();

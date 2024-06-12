@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import HomePage from 'pages/homepage';
+import '@testing-library/jest-dom';
 
 describe('HomePage', () => {
   test('renders search results component with initial search text', () => {

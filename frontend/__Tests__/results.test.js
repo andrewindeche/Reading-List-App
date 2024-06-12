@@ -3,6 +3,7 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import Results, { GET_SEARCH_RESULTS } from 'pages/results';
 import { ReadingListProvider } from 'components/listcontext';
+import '@testing-library/jest-dom';
 
 const mocks = [
   {
@@ -44,7 +45,7 @@ describe('Results', () => {
       </MockedProvider>
     );
 
-    const addButton = screen.getAllByText('Add to Library')[0];
+    const addButton = await screen.findByText('Add to Library');
     fireEvent.click(addButton);
     const addedButton = await screen.findByText('Added');
     expect(addedButton).toBeInTheDocument();
@@ -59,7 +60,7 @@ describe('Results', () => {
       </MockedProvider>
     );
 
-    const addButton = screen.getAllByText('Add to Library')[0];
+    const addButton = await screen.findByText('Add to Library');
     fireEvent.mouseEnter(addButton);
     expect(addButton).toHaveStyle({ backgroundColor: '#CFFAFA' });
 
