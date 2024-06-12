@@ -3,12 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-<<<<<<< HEAD
 const publicPath = process.env.PUBLIC_PATH || '/';
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-=======
-const TerserPlugin = require('terser-webpack-plugin');
->>>>>>> b305bd4 (lazy load imports)
 
 module.exports = {
   entry: {
@@ -50,7 +46,6 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|webp)$/i,
-<<<<<<< HEAD
         include: [
           path.resolve(__dirname, 'frontend/images')
         ],
@@ -58,19 +53,6 @@ module.exports = {
         generator: {
             filename: 'images/[name].[hash][ext]',
         },
-=======
-        use: ['file-loader'],
-        use: [
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              mozjpeg: {
-                progressive: true,
-              },
-            },
-          },
-        ],
->>>>>>> b305bd4 (lazy load imports)
       },
       {
         test: /\.(woff|ttf)$/i,
