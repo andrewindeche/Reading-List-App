@@ -1,19 +1,34 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
-import ReadingList from 'pages/readingList';
-import { ReadingListProvider } from 'components/listcontext';
+import ReadingList from 'pages/readinglist';
+import { ReadingListProvider  } from 'components/listcontext';
+import '@testing-library/jest-dom';
+
+const mockReadingList = [
+  { title: 'Book 1', author: 'Author 1', coverPhotoURL: 'book1.jpg' },
+  { title: 'Book 2', author: 'Author 2', coverPhotoURL: 'book2.jpg' },
+];
+  
+    const MockReadingListProvider = ({ children }) => {
+      const [readingList, setReadingList] = React.useState(mockReadingList);
+    
+      const removeFromReadingList = (title) => {
+        setReadingList(readingList.filter((book) => book.title !== title));
+      };
+    
+      return (
+        <ReadingListProvider value={{ readingList, removeFromReadingList }}>
+          {children}
+        </ReadingListProvider>
+      );
+    };
 
 describe('ReadingList', () => {
   test('renders reading list items', () => {
-    const mockReadingList = [
-      { title: 'Book 1', author: 'Author 1', coverPhotoURL: 'book1.jpg' },
-      { title: 'Book 2', author: 'Author 2', coverPhotoURL: 'book2.jpg' },
-    ];
-
     render(
-      <ReadingListProvider>
+      <MockReadingListProvider>
         <ReadingList />
-      </ReadingListProvider>
+      </MockReadingListProvider>
     );
 
     mockReadingList.forEach((book) => {
@@ -25,11 +40,6 @@ describe('ReadingList', () => {
   });
 
   test('removes book from reading list on button click', () => {
-    const mockReadingList = [
-      { title: 'Book 1', author: 'Author 1', coverPhotoURL: 'book1.jpg' },
-      { title: 'Book 2', author: 'Author 2', coverPhotoURL: 'book2.jpg' },
-    ];
-
     render(
       <ReadingListProvider>
         <ReadingList />
@@ -43,25 +53,25 @@ describe('ReadingList', () => {
     });
   });
 
-  test('applies hover effect on button mouse enter and removes on mouse leave', () => {
-    const mockReadingList = [
-      { title: 'Book 1', author: 'Author 1', coverPhotoURL: 'book1.jpg' },
-      { title: 'Book 2', author: 'Author 2', coverPhotoURL: 'book2.jpg' },
-    ];
+    test('applies hover effect on button mouse enter and removes on mouse leave', () => {
+      render(
+        <ReadingListProvider>
+          <ReadingList />
+        </ReadingListProvider>
+      );
 
-    render(
-      <ReadingListProvider>
-        <ReadingList />
-      </ReadingListProvider>
-    );
-
-    mockReadingList.forEach((book, index) => {
-      const removeButton = screen.getByText('Added').closest('button');
-      fireEvent.mouseEnter(removeButton);
-      expect(removeButton).toHaveStyle({ backgroundColor: 'white', color: '#5ACCCC' });
-
-      fireEvent.mouseLeave(removeButton);
-      expect(removeButton).toHaveStyle({ backgroundColor: '#5ACCCC', color: 'white' });
+      mockReadingList.forEach(() => {
+        const addedButton = screen.getByText('Added').closest('button');
+        expect(addedButton).toBeInTheDocument();
+        expect(addedButton).toHaveStyle({ backgroundColor: '#5ACCCC', color: 'white' });
+  
+        fireEvent.mouseEnter(addedButton);
+        expect(addedButton).toHaveStyle({ backgroundColor: 'white', color: '#5ACCCC' });
+        expect(screen.getByText('Remove')).toBeInTheDocument();
+  
+        fireEvent.mouseLeave(addedButton);
+        expect(addedButton).toHaveStyle({ backgroundColor: '#5ACCCC', color: 'white' });
+        expect(screen.getByText('Added')).toBeInTheDocument();
+      });
     });
   });
-});

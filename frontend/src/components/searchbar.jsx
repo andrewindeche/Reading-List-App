@@ -4,7 +4,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 import { InputAdornment, TextField } from '@mui/material';
 import { useLazyQuery, gql } from '@apollo/client';
-import SearchSuggestions from './suggestions';
 
 const SEARCH_BOOK = gql`
   query SearchBook($title: String!) {
@@ -16,6 +15,8 @@ const SEARCH_BOOK = gql`
     }
   }
 `;
+
+const SearchSuggestions = React.lazy(() => import('./suggestions'));
 
 const Searchbar = ({ setSearchResults }) => {
   const [searchText, setSearchText] = useState('');

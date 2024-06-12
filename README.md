@@ -57,6 +57,24 @@ query Books {
   }
 }
 ```
+### React Server
+
+Run the following command to start React server
+
+To install dependencies
+```bash
+npm install 
+
+```
+To start development server
+```bash
+npm run dev
+```
+
+To start production server
+```bash
+npm start
+```
 
 You can use this query to get the list of books to display in your frontend. You may need to adjust the `coverPhotoURL` to be a valid URL. The photos are in the `src/frontend/assets` directory.
 

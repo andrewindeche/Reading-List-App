@@ -1,8 +1,9 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
-import { MemoryRouter, Route } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import SearchResults from 'pages/searchresults';
+import { GET_SEARCH_RESULT } from 'components/searchresults';
+import '@testing-library/jest-dom';
 
 const mocks = [
   {
@@ -12,12 +13,10 @@ const mocks = [
     },
     result: {
       data: {
-        book: {
-          title: 'Test Book',
-          author: 'Test Author',
-          coverPhotoURL: 'test.jpg',
-          readingLevel: 'Intermediate',
-        },
+        books: [
+          { title: 'Book 1', author: 'Author 1', coverPhotoURL: 'book1.jpg' },
+          { title: 'Book 2', author: 'Author 2', coverPhotoURL: 'book2.jpg' },
+        ],
       },
     },
   },
