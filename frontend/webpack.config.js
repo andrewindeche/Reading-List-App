@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const publicPath = process.env.PUBLIC_PATH || '/';
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -76,11 +75,6 @@ module.exports = {
     }),
     new webpack.IgnorePlugin({
       resourceRegExp: /dev\.js$/,
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: path.resolve(__dirname, 'assets'), to: 'assets/images' },
-      ],
     }),
   ],
 };
