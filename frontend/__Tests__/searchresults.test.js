@@ -4,7 +4,7 @@ import { MockedProvider } from '@apollo/client/testing';
 import SearchResults from 'pages/searchresults';
 import { MemoryRouter, Route } from 'react-router-dom';
 import { GET_SEARCH_RESULT } from 'pages/searchresults';
-import '@testing-library/jest-dom/extend-expect';
+import '@testing-library/jest-dom';
 
 const mocks = [
   {

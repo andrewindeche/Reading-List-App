@@ -32,7 +32,7 @@ describe('HomePage', () => {
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
 
-    await screen.findByText('Result 1');
+    await waitFor(() => expect(screen.getByText('Result 1')).toBeInTheDocument());
     expect(screen.getByText('Result 1')).toBeInTheDocument();
     expect(screen.getByText('Result 2')).toBeInTheDocument();
   });
