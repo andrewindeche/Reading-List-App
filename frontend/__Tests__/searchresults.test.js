@@ -2,7 +2,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import SearchResults from 'pages/searchresults';
-import { GET_SEARCH_RESULT } from 'components/searchresults';
+import { MemoryRouter } from 'react-router-dom';
+import { GET_SEARCH_RESULT } from 'pages/searchresults';
 import '@testing-library/jest-dom';
 
 const mocks = [

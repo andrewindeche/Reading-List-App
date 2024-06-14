@@ -32,8 +32,8 @@ describe('ReadingList', () => {
     );
 
     mockReadingList.forEach((book) => {
-      const titleElement = screen.getByText(book.title);
-      const authorElement = screen.getByText(`By: ${book.author}`);
+      const titleElement = screen.queryByText(book.title);
+      const authorElement = screen.queryByText(`By: ${book.author}`);
       expect(titleElement).toBeInTheDocument();
       expect(authorElement).toBeInTheDocument();
     });
@@ -47,7 +47,7 @@ describe('ReadingList', () => {
     );
 
     mockReadingList.forEach((book) => {
-      const removeButton = screen.getByText('Added').closest('button');
+      const removeButton = screen.queryByText('Added').closest('button');
       fireEvent.click(removeButton);
       expect(screen.queryByText(book.title)).not.toBeInTheDocument();
     });
@@ -61,17 +61,25 @@ describe('ReadingList', () => {
       );
 
       mockReadingList.forEach(() => {
-        const addedButton = screen.getByText('Added').closest('button');
+        const addedButton = screen.queryByText('Added');
+        if (addedButton) {
+          expect(addedButton).toBeInTheDocument();
+          expect(addedButton).toHaveStyle({ backgroundColor: '#5ACCCC', color: 'white' });
+          fireEvent.mouseEnter(addedButton);
+        } else {
+          console.error('Button with text "Added" not found.');
+        }
+
         expect(addedButton).toBeInTheDocument();
         expect(addedButton).toHaveStyle({ backgroundColor: '#5ACCCC', color: 'white' });
   
         fireEvent.mouseEnter(addedButton);
         expect(addedButton).toHaveStyle({ backgroundColor: 'white', color: '#5ACCCC' });
-        expect(screen.getByText('Remove')).toBeInTheDocument();
+        expect(screen.queryByText('Remove')).toBeInTheDocument();
   
         fireEvent.mouseLeave(addedButton);
         expect(addedButton).toHaveStyle({ backgroundColor: '#5ACCCC', color: 'white' });
-        expect(screen.getByText('Added')).toBeInTheDocument();
+        expect(screen.queryByText('Added')).toBeInTheDocument();
       });
     });
   });

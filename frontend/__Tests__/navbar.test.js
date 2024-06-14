@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import NavBar from 'components/navbar'; 
 import '@testing-library/jest-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('NavBar', () => {
   test('renders search link', () => {

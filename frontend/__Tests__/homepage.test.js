@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
-import { GET_SEARCH_RESULTS } from '../src/graphql/queries';
+import { GET_SEARCH_RESULTS } from 'pages/homepage';
 import HomePage from 'pages/homepage';
 import '@testing-library/jest-dom';
 
