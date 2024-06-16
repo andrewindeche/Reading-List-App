@@ -1,9 +1,8 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
-import SearchResults from 'pages/searchresults';
-import { MemoryRouter, Route } from 'react-router-dom';
-import { GET_SEARCH_RESULT } from 'pages/searchresults';
+import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import SearchResults, { GET_SEARCH_RESULT } from 'pages/searchresults';
 import '@testing-library/jest-dom';
 
 const mocks = [
@@ -28,7 +27,9 @@ describe('SearchResults', () => {
     render(
       <MemoryRouter initialEntries={['/searchresults/test']}>
         <MockedProvider mocks={mocks} addTypename={false}>
-          <Route path="/searchresults/:query" component={SearchResults} />
+          <Routes>
+            <Route path="/searchresults/:query" element={<SearchResults />} />
+          </Routes>
         </MockedProvider>
       </MemoryRouter>
     );
@@ -40,16 +41,18 @@ describe('SearchResults', () => {
     render(
       <MemoryRouter initialEntries={['/searchresults/test']}>
         <MockedProvider mocks={mocks} addTypename={false}>
-          <Route path="/searchresults/:query" component={SearchResults} />
+          <Routes>
+            <Route path="/searchresults/:query" element={<SearchResults />} />
+          </Routes>
         </MockedProvider>
       </MemoryRouter>
     );
 
     await waitFor(() => {
       expect(screen.getByText('Book 1')).toBeInTheDocument();
-      expect(screen.getByText('By: Author 1')).toBeInTheDocument();
+      expect(screen.getByText('Author 1')).toBeInTheDocument();
       expect(screen.getByText('Book 2')).toBeInTheDocument();
-      expect(screen.getByText('By: Author 2')).toBeInTheDocument();
+      expect(screen.getByText('Author 2')).toBeInTheDocument();
     });
   });
 
@@ -67,7 +70,9 @@ describe('SearchResults', () => {
     render(
       <MemoryRouter initialEntries={['/searchresults/test']}>
         <MockedProvider mocks={errorMocks} addTypename={false}>
-          <Route path="/searchresults/:query" component={SearchResults} />
+          <Routes>
+            <Route path="/searchresults/:query" element={<SearchResults />} />
+          </Routes>
         </MockedProvider>
       </MemoryRouter>
     );

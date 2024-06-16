@@ -10,15 +10,16 @@ const NavBar = () => (
         end
         className={({ isActive }) => (isActive ? 'navLink activeNavLink' : 'navLink')}
       >
-        <p>Search</p>
+        Search
       </NavLink>
       <NavLink
         to="/readinglist"
         className={({ isActive }) => (isActive ? 'navLink activeNavLink' : 'navLink')}
       >
-        <p>My Reading List</p>
+        My Reading List
       </NavLink>
     </span>
   </div>
 );
+
 export default NavBar;
