@@ -5,6 +5,14 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import SearchResults, { GET_SEARCH_RESULT } from 'pages/searchresults';
 import '@testing-library/jest-dom';
 
+jest.mock('pages/readinglist', () => ({
+  __esModule: true,
+  default: () => ({
+    addToReadingList: jest.fn(),
+    readingList: [],
+  }),
+}));
+
 const mocks = [
   {
     request: {
@@ -27,9 +35,7 @@ describe('SearchResults', () => {
     render(
       <MemoryRouter initialEntries={['/searchresults/test']}>
         <MockedProvider mocks={mocks} addTypename={false}>
-          <Routes>
-            <Route path="/searchresults/:query" element={<SearchResults />} />
-          </Routes>
+          <SearchResults />
         </MockedProvider>
       </MemoryRouter>
     );

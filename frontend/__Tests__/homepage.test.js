@@ -1,9 +1,11 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import { GET_SEARCH_RESULTS } from 'pages/homepage';
 import HomePage from 'pages/homepage';
 import '@testing-library/jest-dom';
+
+const mockOnAddToReadingList = jest.fn();
 
 const mocks = [
   {
@@ -26,7 +28,7 @@ describe('HomePage', () => {
   test('renders search results component with initial search text', async () => {
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
-        <HomePage initialSearchText="initial text" />
+        <HomePage initialSearchText="initial text" onAddToReadingList={mockOnAddToReadingList} />
       </MockedProvider>
     );
 
