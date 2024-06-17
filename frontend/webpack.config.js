@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const publicPath = process.env.PUBLIC_PATH || '/';
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -16,16 +15,9 @@ module.exports = {
       chunks: 'all',
     },
   },
-  optimization: {
-    minimize: true,
-    splitChunks: {
-      chunks: 'all',
-    },
-  },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
-    publicPath: publicPath,
     clean: true,
   },
   resolve: {
@@ -45,11 +37,11 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|webp)$/i,
         include: [
-          path.resolve(__dirname, 'frontend/images')
+          path.resolve(__dirname, 'frontend/images'),
         ],
-        type: 'asset/resource',  
+        type: 'asset/resource',
         generator: {
-            filename: 'images/[name].[hash][ext]',
+          filename: 'images/[name].[hash][ext]',
         },
       },
       {

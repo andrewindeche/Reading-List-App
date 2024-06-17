@@ -41,18 +41,6 @@ describe('SearchResults', () => {
     );
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
-  });
-
-  test('renders book details when data is fetched successfully', async () => {
-    render(
-      <MemoryRouter initialEntries={['/searchresults/test']}>
-        <MockedProvider mocks={mocks} addTypename={false}>
-          <Routes>
-            <Route path="/searchresults/:query" element={<SearchResults />} />
-          </Routes>
-        </MockedProvider>
-      </MemoryRouter>
-    );
 
     await waitFor(() => {
       expect(screen.getByText('Book 1')).toBeInTheDocument();
@@ -76,9 +64,7 @@ describe('SearchResults', () => {
     render(
       <MemoryRouter initialEntries={['/searchresults/test']}>
         <MockedProvider mocks={errorMocks} addTypename={false}>
-          <Routes>
-            <Route path="/searchresults/:query" element={<SearchResults />} />
-          </Routes>
+          <SearchResults />
         </MockedProvider>
       </MemoryRouter>
     );

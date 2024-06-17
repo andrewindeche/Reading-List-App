@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Results from './results';
+import Results from '../components/results';
 
 const HomePage = ({ onAddToReadingList }) => {
   const [searchResults, setSearchResults] = useState([]);

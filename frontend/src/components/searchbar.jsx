@@ -53,6 +53,7 @@ const Searchbar = ({ setSearchResults }) => {
     if (searchText.trim().length > 0) {
       navigate(`/searchresults/${searchText}`);
     }
+    setSearchText('');
     setDropdownVisible(false);
   };
 
