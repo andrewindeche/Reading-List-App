@@ -37,11 +37,11 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|webp)$/i,
         include: [
-          path.resolve(__dirname, 'frontend/images'),
+          path.resolve(__dirname, 'frontend/assets'),
         ],
         type: 'asset/resource',
         generator: {
-          filename: 'images/[name].[hash][ext]',
+          filename: 'assets/[name].[hash][ext]',
         },
       },
       {
@@ -69,7 +69,7 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: path.resolve(__dirname, 'assets'), to: 'assets/images' },
+        { from: path.resolve(__dirname, 'assets'), to: 'assets' },
       ],
     }),
   ],
