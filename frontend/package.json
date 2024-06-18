@@ -85,8 +85,6 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^16.0.0",
-    "@typescript-eslint/eslint-plugin": "^7.12.0",
-    "@typescript-eslint/parser": "^7.12.0",
     "compression-webpack-plugin": "^11.1.0",
     "copy-webpack-plugin": "^12.0.2",
     "dotenv": "^16.4.5",
@@ -105,7 +103,6 @@
     "jest-transform-stub": "^2.0.0",
     "react-refresh": "^0.14.2",
     "react-test-renderer": "^18.3.1",
-    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-merge": "^5.10.0"
   }
 }

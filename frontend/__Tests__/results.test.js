@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, screen, waitFor  } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import { gql } from '@apollo/client';
-import Results, { GET_SEARCH_RESULTS } from 'pages/results';
+import Results, { GET_SEARCH_RESULTS } from 'component/results';
 import { ReadingListProvider } from 'components/listcontext';
 import '@testing-library/jest-dom';
 
@@ -50,18 +50,16 @@ describe('Results', () => {
   });
 
   test('adds book to reading list on button click', async () => {
-    const mocks = [];
     render(
       <MockedProvider mocks={mocks} addTypename={false}>
         <ReadingListProvider>
           <Results searchText="test" />
         </ReadingListProvider>
-      </MockedProvider>
+      </MockedProvider>,
     );
 
     const addButton = await screen.findByText('Add to Library');
     fireEvent.click(addButton);
-    
     await waitFor(() => {
       const addedButton = screen.getByText('Added');
       expect(addedButton).toBeInTheDocument();
@@ -74,9 +72,8 @@ describe('Results', () => {
         <ReadingListProvider>
           <Results searchText="test" />
         </ReadingListProvider>
-      </MockedProvider>
+      </MockedProvider>,
     );
-  
     const buttons = await screen.findAllByText('Add to reading list');
     buttons.forEach(async (button) => {
       fireEvent.mouseEnter(button);
@@ -84,5 +81,5 @@ describe('Results', () => {
       fireEvent.mouseLeave(button);
       await waitFor(() => expect(button).not.toHaveClass('hover'));
     });
-  });  
+  });
 });

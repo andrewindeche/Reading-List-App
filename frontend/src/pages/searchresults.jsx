@@ -24,6 +24,7 @@ const SearchResults = () => {
   const { addToReadingList, readingList } = useReadingList();
   const [hovered, setHovered] = useState(false);
 
+  if (!query) return <p className="loadingStatus">Please Enter a Search</p>;
   if (loading) return <p>Loading...</p>;
   if (error) {
     return (
@@ -34,12 +35,11 @@ const SearchResults = () => {
       </p>
     );
   }
-  if (!data || !data.book) return <p>No book found.</p>;
+  if (!data || !data.book) return <p className="loadingStatus">No book found for Your Search</p>;
 
   const { book } = data;
   const isAdded = readingList.some((b) => b.title === book.title);
-
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className="loadingStatus">Loading...</p>;
   if (error) {
     return (
       <p>
@@ -49,7 +49,7 @@ const SearchResults = () => {
       </p>
     );
   }
-  if (!data || !data.book) return <p>No book found.</p>;
+  if (!data || !data.book) return <p className="loadingStatus">No book found for Your Search</p>;
 
   const getButtonStyles = () => {
     let backgroundColor = 'white';

@@ -103,6 +103,12 @@ h2 {
   gap: 2px; 
   flex-wrap: wrap;
 }
+.loadingStatus{
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+  color:#335C6E;
+}
 .navBar{
     display: flex;
     flex-direction: row;
@@ -206,6 +212,13 @@ h2 {
     border: 2px solid #FAAD00;
     color: white;
     font-weight: medium;
+  }
+  .searchBar input::placeholder {
+    color: inherit; 
+  }
+  .searchBar.placeholderWarning input::placeholder {
+    color: #F76434; 
+    font-weight: bold;
   }
   .searchResults, .readingListResults{
     display: flex;

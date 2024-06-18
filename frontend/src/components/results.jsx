@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useQuery, gql } from '@apollo/client';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import { useReadingList } from '../components/listcontext';
+import { useReadingList } from './listcontext';
 
 const GET_SEARCH_RESULTS = gql`
   query GetSearchResults($searchText: String!) {

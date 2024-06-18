@@ -2,7 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
@@ -19,6 +18,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].[contenthash].js',
     clean: true,
+    publicPath: '/',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -52,11 +52,11 @@ module.exports = {
   },
   devServer: {
     port: 3000,
+    compress: true,
     allowedHosts: ['localhost'],
     historyApiFallback: true,
   },
   plugins: [
-    new BundleAnalyzerPlugin(),
     new CompressionPlugin({
       include: /\/assets\/.*\.(png|jpg|jpeg|webp|js|jsx|css|woff|ttf)$/,
     }),

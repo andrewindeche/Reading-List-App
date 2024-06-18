@@ -66,7 +66,7 @@ describe('SearchResults', () => {
         <MockedProvider mocks={errorMocks} addTypename={false}>
           <SearchResults />
         </MockedProvider>
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     await waitFor(() => {

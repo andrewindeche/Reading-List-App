@@ -23,6 +23,7 @@ const Searchbar = ({ setSearchResults }) => {
   const [searchBook, { data }] = useLazyQuery(SEARCH_BOOK);
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [showEnterSearch, setShowEnterSearch] = useState(false);
   const navigate = useNavigate();
   const inputRef = useRef(null);
 
@@ -47,11 +48,14 @@ const Searchbar = ({ setSearchResults }) => {
   const handleSearchChange = (e) => {
     const { value } = e.target;
     setSearchText(value);
+    setShowEnterSearch(false);
   };
 
   const handleSearch = () => {
     if (searchText.trim().length > 0) {
       navigate(`/searchresults/${searchText}`);
+    } else {
+      setShowEnterSearch(true);
     }
     setSearchText('');
     setDropdownVisible(false);
@@ -77,8 +81,8 @@ const Searchbar = ({ setSearchResults }) => {
         ref={inputRef}
         variant="outlined"
         sx={{ '& .MuiOutlinedInput-root': { borderColor: 'green' } }}
-        className="searchBar"
-        placeholder="Search For Book By Title"
+        className={`searchBar ${showEnterSearch ? 'placeholderWarning' : ''}`}
+        placeholder={showEnterSearch ? 'Please Enter a Search' : 'Search For Book By Title'}
         value={searchText}
         onChange={handleSearchChange}
         onKeyDown={(e) => {
