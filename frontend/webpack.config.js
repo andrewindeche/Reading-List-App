@@ -45,6 +45,15 @@ module.exports = {
         },
       },
       {
+        test: /\.webp$/i,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 244000,
+          },
+        },
+      },
+      {
         test: /\.(woff|ttf)$/i,
         type: 'asset/resource',
       },
@@ -55,6 +64,9 @@ module.exports = {
     compress: true,
     allowedHosts: ['localhost'],
     historyApiFallback: true,
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
   },
   plugins: [
     new CompressionPlugin({
