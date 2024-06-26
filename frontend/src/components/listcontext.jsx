@@ -1,5 +1,5 @@
 import React, {
-  createContext, useContext, useState, useMemo,useCallback
+  createContext, useContext, useState, useMemo, useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
 
@@ -19,7 +19,7 @@ export const ReadingListProvider = ({ children }) => {
 
   const removeFromReadingList = useCallback((title) => {
     setReadingList((prevList) => prevList.filter((book) => book.title !== title));
-  }, []);;
+  }, []);
 
   const contextValue = useMemo(() => ({
     readingList,

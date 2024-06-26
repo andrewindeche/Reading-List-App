@@ -1,8 +1,8 @@
 import React from 'react';
-import { render, fireEvent, screen, waitFor  } from '@testing-library/react';
+import { render, fireEvent, screen, waitFor} from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
 import { gql } from '@apollo/client';
-import Results, { GET_SEARCH_RESULTS } from 'component/results';
+import Results, { GET_SEARCH_RESULTS } from 'components/results';
 import { ReadingListProvider } from 'components/listcontext';
 import '@testing-library/jest-dom';
 
@@ -40,7 +40,7 @@ describe('Results', () => {
         <ReadingListProvider>
           <Results searchText="test" />
         </ReadingListProvider>
-      </MockedProvider>
+      </MockedProvider>,
     );
 
     await waitFor(() => {

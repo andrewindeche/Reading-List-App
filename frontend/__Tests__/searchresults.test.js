@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { MockedProvider } from '@apollo/client/testing';
-import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import SearchResults, { GET_SEARCH_RESULT } from 'pages/searchresults';
 import '@testing-library/jest-dom';
 
@@ -37,7 +37,7 @@ describe('SearchResults', () => {
         <MockedProvider mocks={mocks} addTypename={false}>
           <SearchResults />
         </MockedProvider>
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();

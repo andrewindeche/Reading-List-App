@@ -1,16 +1,6 @@
  ![svgviewer-output](https://github.com/ElloTechnology/backend_takehome/assets/3518127/561bc8d4-bffc-4360-b9ea-61e876bcec93)
 
-
-## About Ello
-
-Ello is a forward-thinking educational technology company dedicated to revolutionizing the way children learn to read. Our mission is to empower young readers with the tools they need to become proficient and passionate readers. We believe that fostering a love for reading is essential for a child's academic and personal growth.
-
-
-## Challenge
-As part of our goal to have Ello impact as many children as we can, we offer an Ello web viewer product. [https://books.ello.com](https://books.ello.com/)
-
-
-We give this to certain schools for free to allow teachers to share our books with children. 
+### About
 You are building part of the teacher-facing UI for this product,
 namely the book assignment view, where teachers can assign books to students. 
 

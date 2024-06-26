@@ -1,8 +1,4 @@
 const { merge } = require('webpack-merge');
-const dotenv = require('dotenv');
-
-dotenv.config();
-
 const common = require('./webpack.config');
 
 module.exports = merge(common, {
@@ -10,7 +6,7 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   devServer: {
     static: './',
-    port: process.env.PORT,
+    port: process.env.PORT || 3000,
     hot: true,
   },
 });
